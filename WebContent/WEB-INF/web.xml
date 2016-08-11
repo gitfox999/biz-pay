@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN" "http://java.sun.com/j2ee/dtds/web-app_2_2.dtd">
+<web-app id="biz-pay">
+	<display-name>biz-pay</display-name>
+	
+	<listener>
+	    <listener-class>com.util.StartTimerListener</listener-class>  
+	</listener> 
+	
+	<servlet>
+		<servlet-name>odds</servlet-name>
+		<display-name>odds</display-name>
+		<description></description>
+		<servlet-class>com.info.odds</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>order</servlet-name>
+		<display-name>order</display-name>
+		<description></description>
+		<servlet-class>com.pay.Order</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>odds</servlet-name>
+		<url-pattern>/odds</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>order</servlet-name>
+		<url-pattern>/order</url-pattern>
+	</servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>

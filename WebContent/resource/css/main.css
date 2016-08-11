@@ -1,0 +1,494 @@
+body {
+	background-color: #000;
+	font: 12px/1.4 微软雅黑, Tahoma, 宋体;
+	position:relative;padding-top:36px;}
+
+.fl {
+	float: left;
+}
+.fr {
+	float: right;
+}
+.cl {
+	clear: both;
+}
+
+.site_head{ background-color:#111111;width:100%; height:45px; border-bottom:1px solid #212121; position:fixed;left:0; top:0;z-index:100;}
+.site_head .header_inner{width:1000px; height:27px;margin:0 auto; position:relative;z-index:99;padding-top:8px;}
+.station_news{ background-image:url(comment.png); background-repeat:no-repeat; background-position:left top; padding-left:25px;margin-top:8px;}
+.station_news span{ color:#b6985a;display:block;float:left;}
+.station_news .news_title{width:50px;}
+.station_news .news_text a{color:#fff;}
+.station_news .news_text a:hover{color:#fff;}
+.station_news .news_text{color:#737373;width:360px; overflow:hidden;}
+
+.header_user_login{font-size:12px; line-height:30px;}
+.header_user_login input{color:#fff;}
+.header_user_login input{margin-right:2px;}
+.login_box2 span{padding-left:8px; line-height:22px;}
+.user_id, .user_pwd{background-image:url(login_input.png);width:95px; height:30px; border:none; background-color:transparent;padding-left:5px;font-size:14px;}
+.ver_code{background-image:url(login_input_code.png);width:67px; height:30px; border:none; background-color:transparent;padding-left:5px;}
+.login_button, .user_reg{margin-left:5px;}
+ .user_reg{line-height:24px;}
+
+.site_navigation{background-image:url(menu_bg.png); background-position:center top;width:100%; height:87px; position:fixed; top:36;left:0;z-index:98;padding-top:10px;top:45px;}
+.site_navigation .navigation_main{width:1000px;margin:0 auto; position:relative;height:85px;z-index:2;}
+.navigation_inner{width:700px;}
+.navigation_area{}
+.navigation_area li{float:left;margin:20px 0 0 0px; line-height:24px;width:100px; text-align:center;font-size:14px;}
+.navigation_area li a{position:relative;width:88px; height:33px; display:block;}
+.navigation_area_help{text-align:right;}
+.navigation_area_help a{padding-left:20px; color:#b6985a;}
+.navigation_area_help a:hover{color:#fff;}
+.nav_tag{position:absolute;  bottom: 15px; left: 25px;position: absolute;}
+.navigation_area .on{display:block; background-image:url(menu_on.png);width:88px; height:33px; color:#640b26;}
+.navigation_area a:hover{display:block; background-image:url(menu_on.png);width:88px; height:33px; color:#640b26;}
+
+.site_focus{position:relative;}
+.focus_inner{position:relative;width:100%; overflow:hidden;height:100%;}
+.banner1{display:block; background-image:url(main_banner1.jpg); background-position:center top; height:537px;}
+.banner2{display:block; background-image:url(main_banner2.jpg); background-position:center top; height:537px;}
+.banner3{display:block; background-image:url(main_banner3.jpg); background-position:center top; height:537px;}
+.sport_banner1{display:block; background-image:url(sport_banner.jpg); background-position:center top; height:537px;}
+.casino_banner1{display:block; background-image:url(casino_banner.jpg); background-position:center top; height:537px;}
+.lottery_banner1{display:block; background-image:url(lottery_banner.jpg); background-position:center top; height:537px;}
+.yh_banner1{display:block; background-image:url(lottery_banner.jpg); background-position:center top; height:537px;}
+.hot_banner1{display:block; background-image:url(hot_banner.jpg); background-position:center top; height:537px;}
+.live_banner1{display:block; background-image:url(live_banner1.jpg); background-position:center top; height:537px;}
+
+
+.site_container{position:relative; z-index:2;}
+.line{background-image:url(line.jpg);height:4px; background-position:center top;}
+.container_inner{ background-image:url(main_box_bg.jpg); background-repeat:no-repeat; background-color:#200c0d;min-height:300px; background-position:center top;padding:40px 0px 50px 0px;}
+.sport_container_inner{height:450px!important;}
+.casino_container_inner{height:430px!important;padding:0px 0px 0px 0px!important;}
+.lottery_container_inner{height:400px!important;}
+
+.site_footer{position:relative; z-index:2; background-image:url(bg_footer.jpg); background-repeat:repeat-x;height:127px;}
+.footer_partner{background-image:url(foot_ico.png);width:733px; height:23px; margin:0 auto;}
+.footer_menu{ text-align:center;padding:30px 0px 20px 0px; color:#c79697;}
+.footer_menu a{color:#c79697; padding:0px 7px;}
+.footer_menu a:hover{color:#fff;}
+.back_top{position:absolute;right:10px; bottom:20px;z-index:9998;}
+.site_service{position:absolute; top:200px; right:0px; z-index:2;}
+
+.first-game-wrap{position:relative;width:1000px; margin:0 auto;}
+
+.ele-firstgame { position: relative; }
+    .ele-firstgame-1 {
+        width: 250px;
+        height: 150px;
+        float:left;
+        _display:inline;
+        position: relative;
+        overflow: hidden;
+        background: url(game11.jpg) -250px bottom no-repeat;
+            }
+    .ele-firstgame-1 span {
+        width: 250px;
+        height: 150px;
+        background: url(game11.jpg) left top no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor:pointer;
+    }
+    .ele-firstgame-2 {
+        width: 250px;
+        height: 150px;
+        float:left;
+        _display:inline;
+        position: relative;
+        overflow: hidden;
+                    background: url(game2.jpg) -250px bottom no-repeat;
+            }
+    .ele-firstgame-2 span {
+        width: 250px;
+        height: 150px;
+        background: url(game2.jpg) left top no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor:pointer;
+    }
+    .ele-firstgame-3 {
+        width: 250px;
+        height: 150px;
+        float:left;
+        _display:inline;
+        position: relative;
+        overflow: hidden;
+                    background: url(game33.jpg) -250px bottom no-repeat;
+            }
+    .ele-firstgame-3 span {
+        width: 250px;
+        height: 150px;
+        background: url(game33.jpg) left top no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor:pointer;
+    }
+    .ele-firstgame-4 {
+        width: 250px;
+        height: 150px;
+        float:left;
+        _display:inline;
+        position: relative;
+        overflow: hidden;
+                    background: url(game4.jpg) -250px bottom no-repeat;
+            }
+    .ele-firstgame-4 span {
+        width: 250px;
+        height: 150px;
+        background: url(game4.jpg) left top no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor:pointer;
+    }
+    .ele-firstgame-5 {
+        width: 250px;
+        height: 150px;
+        float:left;
+        _display:inline;
+        position: relative;
+        overflow: hidden;
+                    background: url(game1.jpg) -250px bottom no-repeat;
+            }
+    .ele-firstgame-5 span {
+        width: 250px;
+        height: 150px;
+        background: url(game1.jpg) left top no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor:pointer;
+    }
+    .ele-firstgame-6 {
+        width: 250px;
+        height: 150px;
+        float:left;
+        _display:inline;
+        position: relative;
+        overflow: hidden;
+                    background: url(game22.jpg) -250px bottom no-repeat;
+            }
+    .ele-firstgame-6 span {
+        width: 250px;
+        height: 150px;
+        background: url(game22.jpg) left top no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor:pointer;
+    }
+    .ele-firstgame-7 {
+        width: 250px;
+        height: 150px;
+        float:left;
+        _display:inline;
+        position: relative;
+        overflow: hidden;
+                    background: url(game3.jpg) -250px bottom no-repeat;
+            }
+    .ele-firstgame-7 span {
+        width: 250px;
+        height: 150px;
+        background: url(game3.jpg) left top no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor:pointer;
+    }
+    .ele-firstgame-8 {
+        width: 250px;
+        height: 150px;
+        float:left;
+        _display:inline;
+        position: relative;
+        overflow: hidden;
+                    background: url(game44.jpg) -250px bottom no-repeat;
+            }
+    .ele-firstgame-8 span {
+        width: 250px;
+        height: 150px;
+        background: url(game44.jpg) left top no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor:pointer;
+    }
+.sport_inner{background-image:url(sport_bg1.png);width:1000px; height:450px; background-position:left -50px;margin:0 auto;}
+.casino_inner{background-image:url(casino_bg.png);width:1000px; height:460px; background-position:left top;margin:0 auto;}
+.sport1, .sport2{margin:0px 65px;}
+.casino_area{margin-top:40px;}
+
+.lottery_inner{width:1000px; background-position:left top;margin:0 auto;}
+.lottery_inner li{float:left;width:200px; height:394px;}
+.lottery_bet{position:absolute;bottom:55px;z-index:3;left:25px;}
+.lottery_bet a{background-image:url(lottery_button.png);width:149px; height:46px; background-position:left top; display:block;}
+.lottery_bet a:hover{ background-position:left -46px; display:block;}
+.lottery_item1{background-image:url(lottery1.png); position:relative;}
+.lottery_item2{background-image:url(lottery3.png); position:relative;}
+.lottery_item3{background-image:url(lottery2.png); position:relative;}
+.lottery_item4{background-image:url(lottery4.png); position:relative;}
+.lottery_item5{background-image:url(lottery5.png); position:relative;}
+.lottery_item6{background-image:url(lottery6.png); position:relative;}
+.lottery_item7{background-image:url(lottery7.png); position:relative;}
+.lottery_item8{background-image:url(lottery8.png); position:relative;}
+.lottery_item9{background-image:url(lottery9.png); position:relative;}
+.lottery_item10{background-image:url(lottery10.png); position:relative;}
+.lottery_item11{background-image:url(lottery11.png); position:relative;}
+.lottery_rule{position:absolute; bottom:40px; left:80px; font-size:10px;z-index:4; color:#7b3a4e!important;}
+
+.hot_inner{width:1000px; margin:0 auto;}
+.hot_inner li{float:left;margin-right:10px; position:relative;margin-bottom:25px;}
+.hot_inner a{position:relative;}
+.hot_inner .htag{position:absolute; display:block; width:45px; height:56px; top:0; left:10px;}
+.hot_inner .hot_new{ background-image:url(hot_new.png);}
+.hot_inner .hot_hot{ background-image:url(hot_tag.png);}
+.hot_inner .hot_over{background-image:url(hot_over.png);position:absolute; display:block; width:240px; height:380px; top:0; left:0;}
+
+.sport_container{background-image:url(sport_bg.jpg); height:1064; background-position:center top;background-repeat:no-repeat;}
+.lottery2_container{background-image:url(lottery2_bg.jpg); height:1064; background-position:center top;background-repeat:no-repeat;}
+.main_container{width:1000px; margin:0 auto; position:relative;padding-top:150px;}
+.main_inner{ background-color:rgba(0, 0, 0, 0.8);color:#fff;}
+
+.hot_container{background-image:url(hot_bg.jpg); min-height:800px; background-position:center top; background-repeat:no-repeat;}
+.hot_container .main_inner{ background-color:#fff;color:#666;padding:0px;}
+.main_inner_l{width:240px; background-color:#fbf2f2;height:500px;padding:20px;}
+.main_inner_r{padding:20px 20px 50px 20px;width:680px;line-height:24px;}
+.main_inner_r h2{font-size:18px; color:#600; line-height:45px;}
+.hot_title{font-size:24px; font-weight:bold; color:#666; border-bottom:2px solid #fbf2f2; line-height:48px;margin-bottom:30px;}
+.main_inner_r h2{}
+.main_inner_r p{ line-height:30px;}
+
+
+
+.ele-firstgame { position: relative; }
+    .ele-firstgame-01 {
+        width: 200px;
+        height: 190px;
+        float:left;
+        _display:inline;
+        position: relative;
+        overflow: hidden;
+        background: url(live1.jpg) -200px bottom no-repeat;
+            }
+    .ele-firstgame-01 span {
+        width: 200px;
+        height: 190px;
+        background: url(live1.jpg) left top no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor:pointer;
+    }
+    .ele-firstgame-02 {
+        width: 200px;
+        height: 190px;
+        float:left;
+        _display:inline;
+        position: relative;
+        overflow: hidden;
+                    background: url(live22.jpg) -200px bottom no-repeat;
+            }
+    .ele-firstgame-02 span {
+        width: 200px;
+        height: 190px;
+        background: url(live22.jpg) left top no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor:pointer;
+    }
+    .ele-firstgame-03 {
+        width: 200px;
+        height: 190px;
+        float:left;
+        _display:inline;
+        position: relative;
+        overflow: hidden;
+                    background: url(live3.jpg) -200px bottom no-repeat;
+            }
+    .ele-firstgame-03 span {
+        width: 200px;
+        height: 190px;
+        background: url(live3.jpg) left top no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor:pointer;
+    }
+    .ele-firstgame-04 {
+        width: 200px;
+        height: 190px;
+        float:left;
+        _display:inline;
+        position: relative;
+        overflow: hidden;
+                    background: url(live44.jpg) -200px bottom no-repeat;
+            }
+    .ele-firstgame-04 span {
+        width: 200px;
+        height: 190px;
+        background: url(live44.jpg) left top no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor:pointer;
+    }
+    .ele-firstgame-05 {
+        width: 200px;
+        height: 190px;
+        float:left;
+        _display:inline;
+        position: relative;
+        overflow: hidden;
+                    background: url(live5.jpg) -200px bottom no-repeat;
+            }
+    .ele-firstgame-05 span {
+        width: 200px;
+        height: 190px;
+        background: url(live5.jpg) left top no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor:pointer;
+    }
+    .ele-firstgame-06 {
+        width: 200px;
+        height: 190px;
+        float:left;
+        _display:inline;
+        position: relative;
+        overflow: hidden;
+                    background: url(live11.jpg) -200px bottom no-repeat;
+            }
+    .ele-firstgame-06 span {
+        width: 200px;
+        height: 190px;
+        background: url(live11.jpg) left top no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor:pointer;
+    }
+    .ele-firstgame-07 {
+        width: 200px;
+        height: 190px;
+        float:left;
+        _display:inline;
+        position: relative;
+        overflow: hidden;
+                    background: url(live2.jpg) -200px bottom no-repeat;
+            }
+    .ele-firstgame-07 span {
+        width: 200px;
+        height: 190px;
+        background: url(live2.jpg) left top no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor:pointer;
+    }
+    .ele-firstgame-08 {
+        width: 200px;
+        height: 190px;
+        float:left;
+        _display:inline;
+        position: relative;
+        overflow: hidden;
+                    background: url(live33.jpg) -200px bottom no-repeat;
+            }
+    .ele-firstgame-08 span {
+        width: 200px;
+        height: 190px;
+        background: url(live33.jpg) left top no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor:pointer;
+    }
+    .ele-firstgame-09 {
+        width: 200px;
+        height: 190px;
+        float:left;
+        _display:inline;
+        position: relative;
+        overflow: hidden;
+                    background: url(live4.jpg) -200px bottom no-repeat;
+            }
+    .ele-firstgame-09 span {
+        width: 200px;
+        height: 190px;
+        background: url(live4.jpg) left top no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor:pointer;
+    }
+	    .ele-firstgame-10 {
+        width: 200px;
+        height: 190px;
+        float:left;
+        _display:inline;
+        position: relative;
+        overflow: hidden;
+                    background: url(live55.jpg) -200px bottom no-repeat;
+            }
+    .ele-firstgame-10 span {
+        width: 200px;
+        height: 190px;
+        background: url(live55.jpg) left top no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor:pointer;
+    }
+
+.about_container{ background-image:url(about_bg.jpg); background-repeat:repeat-y;margin-top:97px;min-height:1000px;}
+.about_l{ width:200px; padding-bottom:200px; position:absolute; left:0;padding-top:30px;}
+.about_l li{ border-bottom: 1px solid #d2d1d1;
+    height: 36px;
+    line-height: 36px;
+    margin: 0 10px;
+    font-size:14px;}
+.about_l a{color:#333;display:block;padding-left: 20px;}
+.about_l a:hover{ background-image:url(about_menu_on.png); background-repeat:no-repeat;width:166px; height:34px;}
+.about_title{font-size:18px;}
+.about_r{position:absolute; left:200px;padding:20px;}
+.about_title{border-bottom:2px solid #d2d1d1;margin-bottom:15px; line-height:45px;}
+.about_r h2{font-size:14px; color:#981717; line-height:45px;}
+.about_r  p{ line-height:36px;padding-bottom:20px;}
+
+.kf-content {height: 404px;overflow: hidden; cursor:pointer;width:189px;}
+.kf-content-right {width: 142px;height: 404px;float: right;background: url(float_services.png) no-repeat 100% 0%;position: relative;}
+.kf-content-right a { display:block;}
+.kf-server {
+    height: 100px;
+    left: 0;
+    position: absolute;
+    top: 50px;
+    width: 142px;
+}
+.kf-qq {
+height: 30px;
+    left: 0px;
+    position: absolute;
+    top: 180px;
+    width: 142px;
+}
+.kf-email {
+    height: 40px;
+    position: absolute;
+    top: 140px;
+    width: 142px;
+}
+.kf-content-left {width: 47px;height:404px;float: right;background: url(float_services.png) no-repeat 0% 0%;}
+
+.hiden{display:none;}
+.hot_bg{width:240px; height:380px; position:absolute; z-index:999; background-color:#000; display:none; left:0;top:0;}
+.main_goback{background-color:#600;padding:10px;width:60px; text-align:center; border-radius:3px 3px 0 0;
+}
