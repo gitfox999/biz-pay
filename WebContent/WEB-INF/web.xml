@@ -4,7 +4,7 @@
 	<display-name>biz-pay</display-name>
 	
 	<listener>
-	    <listener-class>com.util.StartTimerListener</listener-class>  
+	    <listener-class>com.util.quartzdd</listener-class>  
 	</listener> 
 	
 	<servlet>

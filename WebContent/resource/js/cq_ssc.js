@@ -44,7 +44,7 @@ function loadinfo(){
 				$(".bian_td_odds").html("-");
 				$(".bian_td_inp").html("封盘");
 				$("#autoinfo").html("已经封盘，请稍后进行投注！");
-				$.jBox.alert('当前彩票已经封盘，请稍后再进行下注！<br><br>重庆时时彩开盘时间为：每日09:00 - 次日02:00', '提示');
+				//$.jBox.alert('当前彩票已经封盘，请稍后再进行下注！<br><br>重庆时时彩开盘时间为：每日09:00 - 次日02:00', '提示');
 				return false;
 			}
 		} 
@@ -181,8 +181,6 @@ function endtime(iTime)
 			e.attr('src','resource/images/lhj.gif');
 			i++;
 		});
-
-
     }
 	if(iTime==60){
 		$(".bian_td_odds").html("-");
