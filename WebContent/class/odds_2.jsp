@@ -4,7 +4,7 @@
 <%
 	StringBuffer sb = new StringBuffer("{\"number\":\"20160807098\",\"endtime\":84,\"opentime\":328"
 			+ ",\"oddslist\":{\"ball\":{");
-	for(int i=1;i<8;i++){
+	for(int i=1;i<10;i++){
 		sb.append("\""+i+"\":{");
 		for(int j=1;j<15;j++){
 			sb.append("\""+j+"\":\""+AllBall.getRate(i, j)+"\"");
