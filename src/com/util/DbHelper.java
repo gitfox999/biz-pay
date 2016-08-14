@@ -155,7 +155,6 @@ public class DbHelper {
 			try {
 				pst.setObject(i + 1, sqlValues.get(i));
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

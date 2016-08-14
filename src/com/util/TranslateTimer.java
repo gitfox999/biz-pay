@@ -1,7 +1,6 @@
 package com.util;
 
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -19,9 +18,9 @@ public class TranslateTimer {
 
 		Runnable task = new Runnable() {
 			public void run() {
-				stop();
+//				stop();
 //				try {
-////					calc.Open();
+//					calc.Open();
 //				} catch (SQLException e) {
 //					e.printStackTrace();
 //				}

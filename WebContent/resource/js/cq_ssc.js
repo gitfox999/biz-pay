@@ -1,7 +1,7 @@
 var bool = auto_new = false;
 var sound_off=0;
 var ball_odds = cl_hao = cl_dx = cl_ds = cl_zhdx = cl_zhds = cl_lh ='';
-
+var fp,iTime,isFirstLoad = true;
 $(function(){
 	$('#cqc_sound').bind('click',function(){//绑定声音按钮
         var e=$(this);
@@ -38,7 +38,9 @@ function loadinfo(){
 				$("#open_qihao").html(data.number);
 				ball_odds = data.oddslist;
 				loadodds(data.oddslist);
-				endtime(data.opentime);
+				iTime = data.opentime;
+				fp = setInterval("endtime()",1000);
+				setInterval("verifyTime()",10000);
 				auto(1);
 			}else{
 				$(".bian_td_odds").html("-");
@@ -46,6 +48,20 @@ function loadinfo(){
 				$("#autoinfo").html("已经封盘，请稍后进行投注！");
 				//$.jBox.alert('当前彩票已经封盘，请稍后再进行下注！<br><br>重庆时时彩开盘时间为：每日09:00 - 次日02:00', '提示');
 				return false;
+			}
+		} 
+
+	});
+}
+function verifyTime(){
+	$.ajax({
+	    type: 'POST',
+	    url: "class/time.jsp",
+	    dataType: 'json',
+	    success: function(data)
+		{
+			if(data.itime>0){
+				iTime = data.itime;
 			}
 		} 
 
@@ -146,7 +162,7 @@ function getIS(s){
 
 
 //封盘时间
-function endtime(iTime)
+function endtime()
 {
 	var cqc_color=$('#cqc_time').css('color');
 	var iMinute,iSecond;
@@ -188,7 +204,7 @@ function endtime(iTime)
 		$("#look").html('<embed width="0" height="0" src="js/1.swf" type="application/x-shockwave-flash" hidden="true" />');
     }
 	if(iTime<0){
-		clearTimeout(fp);
+		clearInterval(fp);
 		loadinfo();
     }else
     {
@@ -208,7 +224,11 @@ function endtime(iTime)
 //			}
 		}
 
-		if( iTime<=60 && iTime>0){
+		if( iTime<=60 && iTime>=0){
+			$(".bian_td_odds").html("-");
+			$(".bian_td_inp").html("封盘");
+			$("#look").html('<embed width="0" height="0" src="js/1.swf" type="application/x-shockwave-flash" hidden="true" />');
+	    
 		     $('#cqc_time').html(getIS(iTime));
 			if(cqc_color!='blue'){
 				$('#cqc_time').css('color','#006600');
@@ -225,16 +245,16 @@ function endtime(iTime)
 		//$('.minute > span > img').eq(1).attr('src','images/'+t+'/'+sTime.substr(1,1)+'.png');
 		//$('.second > span > img').eq(0).attr('src','images/'+t+'/'+sTime.substr(2,1)+'.png');
 		//$('.second > span > img').eq(1).attr('src','images/'+t+'/'+sTime.substr(3,1)+'.png');
-		fp = setTimeout("endtime("+iTime+")",1000);
     }
 }
 //更新开奖号码
 function auto(ball){
 	$.post("class/auto_2.jsp", {ball : ball}, function(data)
 		{
+			iTime = data.itime;
 			$("#numbers").html(data.numbers);
 			var openqihao = $("#open_qihao").html();
-			if(auto_new == false || openqihao - data.numbers == 1){
+			if(auto_new == false || openqihao - data.numbers == 1 || data.numbers.indexOf("001") == 8){
 				var numinfo='';
 				numinfo = numinfo+'总和：<span><font>'+data.hms[0]+'</font></span>&nbsp;&nbsp;<span><font>'+data.hms[1]+'</font></span>&nbsp;&nbsp;<span><font>'+data.hms[2]+'</font></span>&nbsp;&nbsp;&nbsp;龙虎：<span><font>'+data.hms[3]+'</font></span><br>前三：<span><font>'+data.hms[4]+'</font></span>&nbsp;中三：<span><font>'+data.hms[5]+'</font></span>&nbsp;后三：<span><font>'+data.hms[6]+'</font></span>';
 				$("#autoinfo").html(numinfo);
@@ -257,14 +277,14 @@ function auto(ball){
 					auto_top = auto_top+'<tr class="clbian_tr_txt"><td class="qihao">'+key+'</td><td class="haoma">'+data.hmlist[key]+'</td></tr>'
 				}
 			auto_top = auto_top+'</table>'
-			//$("#auto_list").html(auto_top);
+			$("#auto_list",window.parent.document).html(auto_top);
 			//$(parent.leftFrame.document).find("#auto_list").html(auto_top);
 		}, "json");
 }
 //投注提交
 function order(){
 	var tt = $("input.inp1");
-	var mix = 10; cou = m = 0, txt = '', c=true;
+	var mix = 1; cou = m = 0, txt = '', c=true;
 	for (var i = 1; i < 10; i++){
 		if(i==6){
 			for(var s = 1; s < 8; s++){
@@ -320,10 +340,10 @@ function order(){
 	if (cou <= 0) {$.jBox.tip("请输入下注金额!!!");return false;}
 	var t = "共 ￥"+m+" / "+cou+" 笔，确定下注吗？\n\n下注明细如下：\n\n";
 	txt = t + txt;
-	var ok = confirm(txt);
-	if (ok)
-	document.orders.submit()
-	document.orders.reset()
+	if(confirm(txt)){
+		document.orders.submit()
+		document.orders.reset()
+	}
 }
 //读取第几球
 function did (type)

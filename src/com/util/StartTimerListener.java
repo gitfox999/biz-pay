@@ -17,11 +17,11 @@ public class StartTimerListener implements ServletContextListener {
     /** 
      * 让Web程序运行的时候自动加载Timer 
      */  
-    public void contextInitialized(ServletContextEvent e) {  
+    public void contextInitialized(ServletContextEvent e) {
         tranTimer = new TranslateTimer(); // 启动翻译数据定时器  
         tranTimer.executeTranslateTimer();  
-    }  
-  
+    }
+
     /** 
      * 该方法由容器调用 空实现 
      */  

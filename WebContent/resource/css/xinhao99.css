@@ -1,0 +1,843 @@
+/* common style */
+.clear { clear: both; margin: 0; padding: 0; }
+.floatL{
+    float: left;
+    _display: inline;
+}
+.floatR{
+    float: right;
+    _display: inline;
+}
+/* site style */
+body {
+    min-width: 1108px;
+    font-size: 12px;
+   /*  color: #FFF;*/
+  
+}
+.first{
+    background: url('../images/bg01_x.jpg') repeat-x center 0;
+}
+.zh-cn body {font-family: STHeiti,"Microsoft YaHei", "微软雅黑", "SimSun", "宋体",arial;}
+.zh-tw body {font-family: "Microsoft JhengHei","微軟正黑體",arial,helvetica,sans-serif;}
+#mainBody {
+    background: url('../images/bg02_x.jpg') #B37D01 repeat-x center 0;
+    overflow: hidden;
+}
+.is-tpl #mainBody {
+    overflow: visible;
+}
+.first #mainBody{
+    background: url('../images/bg01.jpg') no-repeat center 0;
+}
+#page-container{
+    padding: 10px 0;
+}
+/* header */
+#page-header {
+    background: url('../images/bg02.jpg') no-repeat center 0;
+    height: 385px;
+}
+.is-tpl #page-header {
+    background: url('../images/bg02.jpg') no-repeat -172px 0;
+    height: 156px;
+}
+.first #page-header{
+  /**  background: none;**/
+    height: 106px;
+}
+.header {
+    width: 1108px;
+    height: 106px;
+    margin: 0 auto;
+}
+.is-tpl .header {
+    margin: 0;
+}
+.header-right{
+    width: 780px;
+    height: 106px;
+}
+.header-top{
+    background: url("../images/top_link.png") no-repeat 0 0;
+    height: 49px;
+    width: 319px;
+    color: #FFF;
+    margin-right: 20px;
+    padding: 0 15px;
+    line-height: 26px;
+    text-align: center;
+}
+.header-top a{
+    color: #FFF;
+    text-decoration: none;
+}
+.header-top a:hover{
+    text-decoration: underline;
+}
+.slogan{
+    width: 343px;
+    height: 31px;
+    margin-right: 20px;
+}
+.lang-wrap{
+    line-height: 20px;
+    margin: 4px 10px 0 0;
+}
+.lang-wrap .ele-lang-wrap{
+    height: 20px;
+    vertical-align: top;
+    margin-right: 5px;
+}
+#est_bg{
+    font-family: arial;
+    background-color: transparent;
+    color: #4B2F03;
+    margin: 2px 0 0 50px;
+}
+.header-logo{
+    width: 280px;
+    height: 100px;
+    margin-left: 10px;
+}
+.header-title-bg{
+    width: 1108px;
+    height: 199px;
+    margin: 0 auto;
+}
+.header-title{
+    height: 100px;
+    width: 293px;
+    margin: 99px 0 0 45px;
+}
+.news-bg{
+    width: 1108px;
+    margin: 0 auto;
+}
+/* 登入區 */
+.login-wrap{
+    width: 882px;
+    height: 40px;
+    margin: 6px auto;
+    padding: 9px 0 0 155px;
+}
+.is-tpl .login-wrap{
+    margin: 6px 0;
+}
+.login-unit{
+    background: url('../images/text01.png') no-repeat center bottom;
+    width: 184px;
+    height: 26px;
+    position: relative;
+    display: block;
+    margin: 1px 0 4px;
+}
+.login-unit .login-placeholder {
+    color: #FFF;
+    cursor: text;
+    position: absolute;
+    left: 12px;
+    top: 5px;
+}
+.login-input{
+    color: #FFF;
+    margin-left: 6px;
+    padding-left:6px; 
+    width: 168px;
+    height: 25px;
+    line-height: 25px \9;
+    background: none;
+    border:none;
+    outline: none;
+}
+#vPic {
+    position: absolute;
+    right: 9px;
+    top: 3px;
+    cursor: pointer;
+}
+.login-submit{
+    width: 89px;
+    height: 30px;
+    margin: 0 5px 0;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.login-joinus{
+    display: block;
+    width: 83px;
+    height: 30px;
+    margin-right: 10px;
+}
+.login-joinus:hover{
+    background: #B41810;
+}
+.login-forget,.login-service{
+    color: #000;
+    text-decoration: none;
+    line-height: 29px;
+}
+.login-forget:hover,.login-service:hover{
+    color: #271701;
+    text-decoration: underline;
+}
+.login-forget-first,.login-joinuslink-first{
+    color: #4B2F03;
+    text-decoration: none;
+    font-weight: bold;
+}
+.login-forget-first:hover,.login-joinuslink-first:hover{
+    color: #271701;
+    text-decoration: underline;
+}
+.login-forget-first{
+    margin-left: 33px;
+}
+.login-joinuslink-first{
+    margin-left: 20px;
+}
+/* first login */
+.login-wrap-first{
+    height: 386px;
+    width: 230px;
+    margin: 12px 55px 0 0;
+    padding-top: 38px;
+}
+.first #LoginForm{
+    background: url('../images/loginbg.png') no-repeat 0 0;
+    width: 207px;
+    height: 190px;
+    padding-top: 16px;
+    padding-left: 23px;
+}
+.login-joinus-first,.login-promotions-first{
+    display: block;
+    width: 208px;
+    height: 47px;
+    margin-left: 13px;
+}
+.login-submit-first{
+    display: block;
+    width: 162px;
+    height: 45px;
+    margin: 12px 0 10px 10px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+/* 登入後 */
+.mem-info-wrap{
+    background: url('../images/loginbg.png') no-repeat 0 0;
+    width: 207px;
+    height: 190px;
+    padding-top: 16px;
+    padding-left: 23px;
+    color: #FFF;
+    margin: 0;
+}
+.mem-info {
+    background: url('../images/loginbg_acc02.png') no-repeat 0 0;
+    width: 480px;
+    height: 24px;
+    padding: 1px 6px 0;
+    margin: 2px 0 0 10px;
+    line-height: 22px;
+    text-align: center;
+}
+.first .mem-info {
+    width: 197px;
+    height: 73px;
+    padding: 35px 0 0 10px;
+    color: #FFF;
+    margin: 0;
+    text-align: left;
+}
+/* 會員選單 */
+.SU-Menual{
+    color: #FFF;
+    line-height: 20px;
+    margin: 4px 35px 0 0;
+}
+.first .SU-Menual{
+    margin: 10px 0 0 5px;
+}
+.SU-Menual ul li {
+    display: inline-block;
+    *display: inline;
+    *zoom:1;
+}
+.SU-Menual ul li a {
+    transition: color .2s;
+    text-decoration: none;
+    color: #FFF;
+}
+.SU-Menual ul li a:hover {
+    color: #FFF;
+    text-decoration: underline;
+}
+#su-logout{
+    color: #FFFF1D;
+}
+.first #su-logout{
+    color: #B90000;
+}
+/* 主選單 */
+.mainnav-wrap {
+    height: 32px;
+    width: 736px;
+}
+.mainnav li {
+    float: left;
+    _display: inline;
+}
+.mainnav a {
+    width: 92px;
+    height: 32px;
+    line-height: 32px;
+    color: #FFF;
+    display: block;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    text-shadow: #000 1px 1px 1px;
+}
+.mainnav a:hover{
+    background: url('../images/nav_over.png') no-repeat 0 bottom;
+    color: #FFF;
+}
+.mainnav a.current{
+    background: url('../images/nav_over.png') no-repeat 0 0;
+    color: #FFF;
+}
+.mainnav a.dbline{
+    height: 30px;
+    padding-top: 2px;
+    line-height: 14px;
+}
+/* 副選單 */
+#L-Sub {
+    position: relative;
+    z-index: 10;
+}
+#L-Sub div {
+    display: none;
+    position: absolute;
+    height: 23px;
+    line-height: 23px;
+    padding: 0 8px;
+    z-index: 100;
+}
+#L-Sub a,
+#L-Sub span {
+    background: url('../images/sub.png') repeat 0 0;
+    float: left;
+    height: 23px;
+}
+#L-Sub a {
+    font-weight: bold;
+    padding: 0 4px;
+    text-decoration: none;
+    background-position: 100% center;
+    color: #BBA4A4;
+}
+#L-Sub a:hover{
+    color:#FFF;
+}
+#L-Sub span { width: 23px; }
+#L-Sub span.subbg-left  { background-position: 100% top;  }
+#L-Sub span.subbg-right { background-position: 100% bottom; }
+/* first */
+#page-body{
+    width: 1056px;
+    margin: 0 auto;
+    padding: 0 26px;
+}
+.first #page-body{
+    height: 478px;
+    width: 1108px;
+}
+.ad-flash{
+    width: 381px;
+    height: 153px;
+    margin: 116px 0 0 45px;
+}
+#page-first-bottom{
+    height: 202px;
+}
+.first-bottom{
+    width: 1108px;
+    margin: 0 auto;
+}
+.ele-firstgame-wrap{
+    float: left;
+}
+.jackpot{
+    background: url('../images/prize_bg.png') no-repeat 0 0;
+    width: 230px;
+    height: 47px;
+    padding: 35px 0 0 0;
+}
+.ele-jackpot{
+    cursor: pointer;
+    text-align: center;
+    font-size: 20px;
+}
+.jackpot .ele-jackpot-wrap{
+    padding-left: 30px;
+    width: 200px;
+}
+.first-game-wrap{
+    width: 1108px;
+}
+.first-game{
+    float: left;
+    width: 168px;
+    height: 151px;
+}
+.first-game-live{
+    margin: 16px 0 0 170px;
+}
+.first-game-sport {
+    margin: 45px 0 0 29px;
+}
+.first-game-casino {
+    margin: 47px 0 0 50px;
+}
+.first-game-lottery {
+    margin: 13px 0 0 40px;
+}
+/* 最新消息 */
+.news-wrap{
+    width: 938px;
+    height: 25px;
+    line-height: 25px;
+    color: #FFF;
+    padding: 0 40px 0 130px;
+}
+.news-wrap-first{
+    height: 23px;
+    width: 730px;
+    margin: 0 0 0 40px;
+    padding: 10px 168px 0 130px;
+}
+.news-wrap-first{
+    width: 750px;
+}
+.news-item{
+    height: 23px;
+    width: 900px;
+    color: #FFF;
+}
+.first .news-item{
+    width: 730px;
+}
+/* footer */
+.footer-bottom-bg{
+    background: url('../images/footer_bg.jpg') repeat-x center 0;
+}
+.footer-bottom{
+    width: 1108px;
+    height: 156px;
+    margin: 0 auto;
+    text-align: center;
+    color: #FFF8A0;
+    line-height: 19px;
+}
+.footer {
+    width: 1108px;
+    margin: 0 auto;
+    color: #65657C;
+}
+.footer-top{
+    height: 53px;
+    text-align: center;
+    padding-left: 25px;
+}
+.footer-img{
+    height: 55px;
+    width: 714px;
+    margin: 0 auto;
+    padding: 10px 0 6px;
+}
+#bblogo{
+    background: url('../images/bbinlogo.png') no-repeat 0 0;
+    width: 142px;
+    height: 55px;
+}
+.bank-img{
+    background: url('../images/footer_img01.png') no-repeat 0 0;
+    width: 386px;
+    height: 55px;
+}
+.worldcup-img{
+    background: url('../images/footer_img02.png') no-repeat 0 0;
+    width: 186px;
+    height: 55px;
+}
+.footer-download{
+    display: block;
+    width: 264px;
+    height: 53px;
+}
+.footer-service{
+    display: block;
+    width: 274px;
+    height: 53px;
+}
+.article-menu{
+    background: url('../images/btn_link_bg.png') no-repeat center 0;
+    width: 513px;
+    height: 53px;
+    line-height: 53px;
+    color: #4B2F03;
+    white-space: nowrap;
+}
+.article-menu a{
+    color: #4B2F03;
+    text-decoration: none;
+}
+.article-menu a:hover{
+    color: #271701;
+    text-decoration: underline;
+}
+.footer-info{
+    white-space: nowrap;
+}
+.copyright{
+    white-space: nowrap;
+}
+/*footer Intro 本站特例*/
+#footer-intro{
+    width: 1048px;
+    height: 260px;
+    margin: 0 auto;
+    padding: 23px 30px 20px;
+}
+.footerIntroBox{
+    width: 150px;
+    margin: 0 12px;
+}
+.footerBoxTitle{
+    background: url('../images/text02.png') no-repeat 0 0;
+    color: #FFD326;
+    font-weight: bold;
+    height: 26px;
+    line-height: 26px;
+    margin: 8px 0;
+    padding-left: 48px;
+}
+.footerBox_text{
+    color: #D1B366;
+    line-height: 20px;
+}
+/* live */
+.road-map a{
+    background-color: #DDC668;
+    display: block;
+    width: 139px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    color: #000;
+    text-decoration: none;
+    margin: 0 0 5px 900px;
+}
+.road-map a:hover{
+    background-color: #DAA74F;
+    color: #FFF;
+}
+/* liveTop */
+.livetop-flash {
+    width: 900px;
+    margin: 0 auto;
+}
+/* game frame */
+#page-game-left{
+    width:228px;
+    margin: 7px 10px 0 53px;
+    float:left;
+    _display: inline;
+}
+#page-game-right{
+    width: 733px;
+    float: right;
+    _display: inline;
+}
+/* game */
+.game-list.hided { display: none; }
+.game-data{
+    float: left;
+    _display: inline;
+}
+.game-item {
+    background: url('../images/gamebg01.png') no-repeat 0 0;
+    float: left;
+    _display: inline;
+    width: 337px;
+    height: 185px;
+    margin: 5px 7px;
+}
+.isLogin .game-item-lottery {
+    *padding-bottom: 20px;
+    margin-bottom: 75px;
+}
+.game-img {
+    float: right;
+    _display: inline;
+    position: relative;
+    margin: 11px 14px 0 0;
+}
+.game-img,
+.game-img img {
+    width: 160px;
+    height: 160px;
+}
+.game-imgs {
+    float: right;
+    _display: inline;
+    position: relative;
+    margin: 11px 14px 0 0;
+}
+.game-info{
+    width: 162px;
+}
+.game-name {
+    float: left;
+    _display: inline;
+    width: 118px;
+    height: 24px;
+    line-height: 24px;
+    margin: 15px 0 0 38px;
+    text-decoration: none;
+    text-align: left;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #FFF;
+}
+.game-link {
+    float: right;
+    _display: inline;
+    width: 126px;
+    margin: 18px 0 0 0;
+}
+.game-link a {
+    background: url('../images/game_rule.png') no-repeat 0 0;
+    display: block;
+    height: 36px;
+    width: 94px;
+    line-height: 34px;
+    text-align: center;
+    color: #FFF;
+    text-decoration: none;
+}
+.game-link a:hover {
+    background: url('../images/game_rule.png') no-repeat 0 bottom;
+    text-decoration: underline;
+}
+.game-link .game-enter{
+    background: url('../images/game_enter.png') no-repeat 0 0;
+    margin-top: 10px;
+    color: #FFF163;
+}
+.game-link .game-enter:hover{
+    background: url('../images/game_enter.png') no-repeat 0 bottom;
+}
+.GameIcon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    cursor: pointer;
+    background-repeat: no-repeat;
+}
+.GameIcon-First {
+    width: 72px;
+    height: 29px;
+}
+.GameIcon-New {
+    background-image: url('../images/New.gif');
+    width: 36px;
+    height: 37px;
+}
+.lottery-result {
+    position: absolute;
+    top: 137px;
+    left: 0;
+    width: 302px;
+    height: 0;
+    overflow: hidden;
+    line-height: 15px;
+    padding: 10px 7px 3px;
+    border: 1px solid #7C7C7C;
+    border-radius: 5px;
+    background: #1B1B1B;
+    color: #FFF;
+}
+.lottery-result-preload {
+  visibility: hidden;
+  opacity: 0;
+}
+.lottery-result-rounds {
+    color: #FFF08B;
+    padding: 0 5px;
+}
+.lottery-result-numbers {
+    color: #FFF08B;
+}
+/* IntroGame */
+#Game_left_menu li{
+    background-color: #AF7801;
+}
+.iGameIcon-3D{
+    position:absolute;
+    bottom: 4px;
+    right: 1px;
+    z-index:2;
+    width: 32px;
+    height: 32px;
+    background: url(../images/3dgame_icon.png) 0 0 no-repeat;
+    _width: 26px;
+    _height: 26px;
+    _background: url(../images/3dgame_icon.gif) 0 0 no-repeat;
+}
+#game_classify{
+    padding-bottom: 10px;
+}
+#Game_left_menu a.gm-2 .gameAmt{
+    color: #FFF;
+}
+/* 文案區塊 */
+#page-sidebar {
+    float: left;
+    _display: inline;
+    width: 200px;
+    margin-left: 24px;
+}
+#page-right {
+    float: right;
+    _display: inline;
+    width: 804px;
+    margin-right: 15px;
+}
+/*遊戲選單*/
+.sidemenu-body {
+    background: url('../images/sidebar_bg.png') repeat-y center 0;
+    padding-bottom: 10px;
+}
+.sidemenu-header{
+    width: 200px;
+    height: 124px;
+}
+.sidemenu-footer{
+    background: url('../images/sidebar_bottom.png') no-repeat center 0;
+    width: 200px;
+    height: 20px;
+}
+.sidemenu-body ul {
+    background: url('../images/sidebar.png') no-repeat center 0;
+    padding-top: 10px;
+}
+.sidemenu-body li {
+    _height: 31px;
+}
+.sidemenu-body a {
+    background: url('../images/sidebar_over.png') no-repeat center 0;
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    margin: 3px 0;
+    padding: 1px 0 0 71px;
+    text-align: left;
+    text-decoration: none;
+    color: #FFF;
+    _position: relative;
+}
+.sidemenu-body a:hover {
+    background: url('../images/sidebar_over.png') no-repeat center bottom;
+    color: #FFF;
+}
+/*文案*/
+#direction{
+    background: url('../images/about.png') repeat-y 0 0;
+    width: 764px;
+    min-height: 400px;
+    padding: 10px 20px;
+}
+.memberexclusiveii #direction{
+    background: none;
+    padding: 10px 19px;
+    width: auto;
+}
+#direction #MemberExclusive_area{
+    margin: 0 auto;
+}
+.about-bg-top{
+    background: url('../images/about_top.png') no-repeat 0 0;
+    width: 804px;
+    height: 20px;
+}
+.about-bg-bottom{
+    background: url('../images/about_bottom.png') no-repeat 0 0;
+    width: 804px;
+    height: 15px;
+}
+/*文案標題*/
+#direction ul.mtab-menual {
+    list-style: none;
+}
+#direction ul.mtab-menual li {
+    padding: 1px 10px;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    cursor: pointer;
+}
+#direction ul.mtab-menual li:hover,
+#direction ul.mtab-menual li.mtab {
+    color: #000;
+    background-color: #AAA;
+}
+#direction .mtab-menual {
+    margin-top: 10px;
+}
+/*優惠活動*/
+#PT-switcher-wrap {
+    padding-left: 40px;
+}
+#joinMember{
+    background: url('../images/about.png') repeat 0 0;
+    width: 764px;
+    padding: 0 20px;
+}
+#joinMember iframe{
+    width: 764px;
+}
+/*共用頁面*/
+.Tpl-table01 {
+    background-color: #FFF;
+    border: 1px solid #CCC;
+    color: #000;
+    font-size: 12px;
+}
+table .Tpl-title01 th {
+    height: 24px;
+    text-align: center;
+    font-weight: bold;
+    background-color: #DDD;
+}
+#Tpl-user-acc span {
+    line-height: 20px;
+    color: #0000FF;
+}
+.Tpl-table01 th, .Tpl-table01 td {
+    height: 22px;
+    border: 1px solid #CCC;
+}
+tr.Tpl-trcolor1 { background: #FFF; }
+tr.Tpl-trcolor2 { background: #EEE; }
+tr.Tpl-trmouseenter { background: #DEF; }
+#Tpl-memdata .Tpl-table01 th,
+#Tpl-memdata .Tpl-table01 td.Tpl-left { text-align: center; }
+#Tpl-memdata .Tpl-table01 td.Tpl-right { text-align: left; }
+.Tpl-blue { color: #00F; }

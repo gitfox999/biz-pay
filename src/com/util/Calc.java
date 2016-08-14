@@ -4,33 +4,33 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Calc {
-	public void Open() throws SQLException {
+	public void Open(Date preTime,Date curNoDate) throws SQLException {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String startTime = simpleDateFormat.format(preTime);;
+		String endTime = simpleDateFormat.format(curNoDate);
 		String openInfo = "";
 		String[] earnRatePathArray = {"0.15*0.25","0.05*0.15","0*0.05","0.25*0.5","0.5*1","-0.1*0"};
 		DbHelper dbHelper = new DbHelper();
 		Connection connection = dbHelper.getConnection();
-		PreparedStatement preparedStatement = connection.prepareStatement("select sum(money) from sscorder as earn");
+		String earnSql = "select sum(money) from sscorder as earn where otime >= '"+startTime+"' and otime <= '"+endTime+"'";
+		PreparedStatement preparedStatement = connection.prepareStatement(earnSql);
 		ResultSet resultSet = preparedStatement.executeQuery();
 		resultSet.next();
 		int inMoney = resultSet.getInt(1);
-		preparedStatement = connection.prepareStatement("select * from sscorder");
+		preparedStatement = connection.prepareStatement("select * from sscorder where otime >= '"+startTime+"' and otime <= '"+endTime+"'");
 		resultSet = preparedStatement.executeQuery();
 		int[] nums = new int[5];
-//		String strNum = "";
-//		char[] charNumArray;
 		String[] openNumArray = new String[100000];
 		for(int j = 0;j< openNumArray.length;j++){
-//			strNum = String.format("%05d", j);
-//			charNumArray = reverseArray(strNum.toCharArray());
-//			charNumArray = strNum.toCharArray();
 			double payMoneyAll = 0;
 			for(int i=0;i<5;i++){
 				int num = (int)(0+Math.random()*(9-0+1));
-//				int num = Integer.valueOf(charNumArray[i]+"");
 				nums[i] = num;
 			}
 			List<String> strings = panduan(nums);
@@ -46,55 +46,11 @@ public class Calc {
 				}
 			}
 			double tmpEarnMoney = inMoney - payMoneyAll;
-			double earnRate = tmpEarnMoney / inMoney;
+			double earnRate = 0;
+			if(tmpEarnMoney != 0D){
+				earnRate = tmpEarnMoney / inMoney;
+			}
 			openNumArray[j] = (j+1)+" "+getNo(nums)+" "+tmpEarnMoney+" "+String.valueOf(earnRate);
-//			System.out.println(calcTimes+" "+getNo(nums)+"  "+tmpEarnMoney+"   "+String.valueOf(earnRate));
-//			openNumArray[j] = (j+" "+getNo(nums)+"  "+tmpEarnMoney+"   "+String.valueOf(earnRate));
-//			if(earnRate >= 0.1 && earnRate <= 0.2){
-//				break;
-//			}
-//			if(earnRate >= 0.2 && earnRate <= 0.3){
-//				break;
-//			}
-//			if(earnRate >= 0.0 && earnRate <= 0.1){
-//				break;
-//			}
-//			if(earnRate >= 0.3 && earnRate <= 0.4){
-//				break;
-//			}
-//			if(earnRate >= 0.4 && earnRate <= 0.5){
-//				break;
-//			}
-//			if(earnRate >= 0.5 && earnRate <= 0.6){
-//				break;
-//			}
-//			if(earnRate >= 0.6 && earnRate <= 0.7){
-//				break;
-//			}
-//			if(earnRate >= 0.7 && earnRate <= 0.8){
-//				break;
-//			}
-//			if(earnRate >= 0.8 && earnRate <= 0.9){
-//				break;
-//			}
-//			if(earnRate >= 0.9 && earnRate <= 1){
-//				break;
-//			}
-//			if(tmpEarnMoney <0){
-//				winmoney = tmpEarnMoney;
-//				oknum = "";
-//				for(int i =4;i>=0;i--){
-//					oknum += nums[i]+""; 
-//				}
-//				break;
-//			}
-//			if(tmpEarnMoney > maxWin){
-//				maxWin = tmpEarnMoney;
-//				oknum = "";
-//				for(int i =4;i>=0;i--){
-//					oknum += nums[i]+""; 
-//				}
-//			}
 		}
 		double minRate = 0,maxRate = 0,eartnRateTmp = 0;
 		for (int i = 0; i < earnRatePathArray.length; i++) {
@@ -114,6 +70,15 @@ public class Calc {
 			}
 			if(isHas) break;
 		}
+		InsertNo insertNo = new InsertNo();
+		String openNum = openInfo.split(" ")[1];
+		char[] charNumArray = openNum.toCharArray();
+		for(int i=0;i<5;i++){
+			int num = Integer.valueOf(charNumArray[i]+"");
+			nums[i] = num;
+		}
+		List<String> numRules = panduan(nums);
+		insertNo.insertAll(nums, curNoDate, numRules);
 		System.out.println(openInfo);
 	}
 	
@@ -203,7 +168,7 @@ public class Calc {
 		boolean isqz = true,iszz = true,ishz = true;
 		boolean isqs = false,isqd = false,iszs = false,iszd = false,ishs = false,ishd = false;
 		
-		if(nums[2] == nums[0] && nums[1] == nums[2]){strings.add("7_1");}
+		if(nums[2] == nums[0] && nums[1] == nums[2]){strings.add("7_1");isqz=false;}
 		if(isShun(nums[2],nums[1],nums[0])){strings.add("7_2");isqz=false;isqs=true;}
 		if((nums[2] == nums[1] && nums[2] != nums[0]) 
 				|| (nums[2] == nums[0] && nums[2] != nums[1])
@@ -211,7 +176,7 @@ public class Calc {
 		if(isBanShun(nums[2],nums[1],nums[0]) && !isqs && !isqd){strings.add("7_4");isqz=false;}
 		if(isqz){strings.add("7_5");}
 		
-		if(nums[2] == nums[3] && nums[1] == nums[2]){strings.add("8_1");iszz=false;isqz=false;}
+		if(nums[2] == nums[3] && nums[1] == nums[2]){strings.add("8_1");iszz=false;}
 		if(isShun(nums[3],nums[2],nums[1])){strings.add("8_2");iszz=false;iszs=true;}
 		if((nums[3] == nums[2] && nums[3] != nums[1]) 
 				|| (nums[3] == nums[1] && nums[3] != nums[2])

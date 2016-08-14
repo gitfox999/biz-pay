@@ -6,6 +6,7 @@ import javax.servlet.ServletContextListener;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
+import org.quartz.JobKey;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.Trigger;
@@ -29,13 +30,13 @@ public class quartzdd implements ServletContextListener {
             // 具体任务
             JobDetail job = JobBuilder.newJob(HelloJob.class).withIdentity("job1", "group1").build();
 
-            CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule("10 9,19,29,39,49,59 * * * ?");
+//            CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule("30 * * * * ?");
+            CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule("0 5,15,25,35,45,55 * * * ?");
             Trigger trigger = TriggerBuilder.newTrigger().withIdentity("trigger1", "group1")
                     .withSchedule(cronScheduleBuilder).build();
 
             // 交由Scheduler安排触发
             scheduler.scheduleJob(job, trigger);
-            
         } catch (SchedulerException se) {
         }
     }
