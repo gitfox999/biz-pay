@@ -1,5 +1,12 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+	String dateNow = dateFormat.format(new Date());
+	long curTime = (new Date()).getTime();
+%>
 <html class="madvertis zh-cn at1"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 
@@ -61,6 +68,7 @@
 <script src="resource/js/float.js"></script>
 <script src="resource/js/swfobject.js"></script>
 <script src="resource/js/jquery.cookie.js"></script>
+<script type="text/javascript" language="JavaScript" src="resource/js/main.js"></script>
 <script type="text/javascript" src="home.js"></script>
 <script type="text/javascript" src="resource/js/jquery.jBox-2.3.min.js"></script>
 <script type="text/javascript" src="resource/js/jquery.jBox-zh-CN.js"></script>
@@ -174,7 +182,7 @@ $(document).ready(function (e) {
     #ele-logo-img { background-position: 0 0; }
 </style>
 <script type="text/javascript">
-        var current = 1471141243000 || 0;
+        var current = <%=curTime%> || 0;
 
         /**
          * 即時時間顯示
@@ -266,7 +274,7 @@ $(document).ready(function (e) {
                     &nbsp;|&nbsp;
                     <a href="javascript:f_com.setHomepage('http://www.5887788.com');" title="设为首页">设为首页</a>
                     
-                <!-- est --><p class="topTime b_r" id="EST_reciprocal">美东时间：2016/08/14 - 10:21:18</p>
+                <!-- est --><p class="topTime b_r" id="EST_reciprocal">美东时间：<%=dateNow %></p>
                 <div class="est-wrap">
                  
                                    </div>                                  
@@ -299,38 +307,26 @@ function gbc() { document.getElementById('123-gq').style.display='none'; }
             <div class="mainnav-wrap floatR">
                 <ul class="mainnav clearfix">
                     <li>
-                        <a href="javascript:GoTo('1','Home');" class="current">首页</a>
+                        <a href="javascript:GoTo('1','main');" class="current">首页</a>
                     </li>
-                    <li onmouseout="javascript:gbc()" onmouseover="javascript:xsc()">
-                        <a href="javascript:crownsports();">体育赛事</a>
-                        
-         <ul class="subnav11" id="123-gq" style="display:none;">
-         <span>
-         <a onmouseout="javascript:gbc()" onmouseover="javascript:xsc()" href="javascript:bstiyu();">BS体育</a>
-       
-         <a onmouseout="javascript:gbc()" onmouseover="javascript:xsc()" href="javascript:crownsports();">皇冠体育</a>
-         </span>
-         </ul>
-         
-                        
-     </li>
-                        
-                        
+                    <li>
+                        <a href="javascript:GoTo('1','rule');">游戏规则</a>
+                    </li>
                     
                     <li>
-                        <a href="javascript:GoTo('1','Live');">视讯直播</a>
+                        <a href="javascript:GoTo('1','reg');">申请开户</a>
                     </li>
                     <li>
-                        <a href="javascript:GoTo('1','Game');">电子游艺</a>
+                        <a href="javascript:void(0);" onclick="GoToMember(1,0);return false">我要充值</a>
                     </li>
                     <li>
-                        <a href="javascript:GoTo('1','Lottery');">彩票游戏</a>
+                        <a href="javascript:void(0);" onclick="GoToMember(1,1);return false">我要提款</a>
                     </li>
                     <li>
-                        <a href="javascript:wap();">手机下注</a>
+                        <a href="javascript:alert('该功能尚未开通，敬请期待！');">手机下注</a>
                     </li>
                     <li>
-                        <a href="javascript:GoTo('1','Hot');" id="nav-promotions" style="color: rgb(255, 255, 255);">优惠活动</a>
+                        <a href="javascript:GoTo('1','Hot');" id="nav-promotions" style="color: rgb(255, 255, 0);">优惠活动</a>
                     </li>
                     <li>
                         <a href="javascript:OnlineServer();">在线客服</a>

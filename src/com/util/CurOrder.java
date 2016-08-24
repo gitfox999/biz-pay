@@ -23,6 +23,7 @@ public class CurOrder {
 	public static String qishu;
 	public static String preQishu;
 	public static List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+	public static String url = "http://localhost:8080/biz-pay/";
 	
 	public static void resultSetToList(ResultSet rs) throws java.sql.SQLException {   
 		list = new ArrayList<Map<String,Object>>();
@@ -110,5 +111,17 @@ public class CurOrder {
 		}else{
 			return false;
 		}
+	}
+	
+	public static double getTrueMoney(int money){
+		return ((double)money)/100;
+	}
+	
+	public static double getTrueMoney(String money){
+		return (Double.valueOf(money))/100;
+	}
+	
+	public static int getFaceMoney(double money){
+		return (int)money*100;
 	}
 }

@@ -53,13 +53,10 @@
   </div>
 <script language="javascript">bianse("thetable","#F5F5F5","#FFFFFF","#FFFFCC","#FFFFCC");</script> 
 <script type="text/javascript">
-alert(1);
 	$("#S_date").datepicker();
-	debugger;
 	$("#E_date").datepicker({
 		minDate: -31,
 		maxDate: 0
 	});
-	alert();
 </script>
 <div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div></body></html>
