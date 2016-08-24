@@ -10,7 +10,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class InsertNo {
-	public void insertAll(int[] nums,Date curNoDate,List<String> numRules) throws SQLException{
+	//如果openInfo等于空的话，应回归订单
+	public void insertAll(int[] nums,Date curNoDate,List<String> numRules,String openInfo,int inmoney) throws SQLException{
 		SimpleDateFormat dateFormat_day = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String noStr = "",preRowNo="";
@@ -80,10 +81,20 @@ public class InsertNo {
 				hou = "半顺";
 			}
 		}
+		String stime = dateFormat.format(CurOrder.startDate);
+		String etime = dateFormat.format(CurOrder.endDate);
+		String[] openNumInfoArray = openInfo.split(" ");
+		int eartnRateTmp = Integer.parseInt(openNumInfoArray[3]);
+		int eartMoney = Integer.parseInt(openNumInfoArray[2]);
 		preparedStatement = connection.prepareStatement("insert into ssc values ("+id+",'"+noStr+"',"+sum+","+cross+",'"+nowStr+"',"+times
-				+",'"+daxiao+"','"+danshuang+"','"+longhuhe+"','"+qian+"','"+zhong+"','"+hou+"')");
+				+",'"+CurOrder.qishu+"','"+daxiao+"','"+danshuang+"','"+longhuhe+"','"+qian+"','"+zhong+"','"+hou+"','"+stime+"','"+etime
+				+"',"+eartMoney+","+inmoney+","+eartnRateTmp+")");
 		preparedStatement.execute();
 		connection.commit();
+		resultSet = preparedStatement.executeQuery("select * from ssc order by id desc limit 0,1");
+		resultSet.next();
+		int newSscId = resultSet.getInt("id")+1;
+		fenzhang(connection,preparedStatement,numRules,newSscId,noStr);
 		dbHelper.closeAll(connection, preparedStatement, resultSet);
 	}
 	
@@ -119,7 +130,7 @@ public class InsertNo {
 			int numTmp = isHasData ? resultSet.getInt("n"+i):0;
 			numArray[i] = numTmp == -1 ? 1 : numTmp+1;
 			
-			int numCrossTmp = isHasData ? resultSet.getInt("n"+i):0;
+			int numCrossTmp = isHasData ? resultSet.getInt("z"+i):0;
 			numCrossArray[i] = numCrossTmp == -1 ? 1 : numCrossTmp+1;
 		}
 		for(int i=0;i<otherStrArray.length;i++){
@@ -144,5 +155,43 @@ public class InsertNo {
 		}
 		String sql = "insert into "+tableName+" values ("+id+","+sscid+buffer.toString()+")";
 		preparedStatement.execute(sql);
+	}
+	
+	private void fenzhang(Connection connection,PreparedStatement preparedStatement,List<String> numRules,int sscid,String num) throws SQLException{
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String startTime = simpleDateFormat.format(CurOrder.startDate);
+		String endTime = simpleDateFormat.format(CurOrder.endDate);
+		PreparedStatement preparedStatementQuery = connection.prepareStatement("select * from sscorder where otime >= '"+startTime+"' and otime <= '"+endTime+"'");
+		ResultSet resultSet = preparedStatementQuery.executeQuery();
+		int exeCount = 0;
+		while (resultSet.next()) {
+			exeCount++;
+			int isWin = 0;
+			String balltmp = resultSet.getInt("pos")+"_"+resultSet.getInt("num");
+			int payMoney = resultSet.getInt("emoney");
+			for(String ballcur : numRules){
+				if(ballcur.equals(balltmp)){
+					isWin = 1;
+					break;
+				}
+			}
+			String updateOrder = "update sscorder set iswin = "+isWin+",sscid = '"+sscid+"' where id = "+resultSet.getInt("id");
+			preparedStatement.execute(updateOrder);
+			if(isWin == 1){
+				int memid = resultSet.getInt("memid");
+				String nowStr = simpleDateFormat.format(new Date());
+				String remark = "期数："+CurOrder.qishu+",开奖号码："+num+",投注详情："+resultSet.getString("detail")+",投注额："+(((double)resultSet.getInt("emoney"))/100);
+				String winSql = "insert into flow (memid,money,type,dirction,ts,remark) values ("+memid+","+payMoney+",3,1,'"+nowStr+"','"+remark+"')";
+				preparedStatement.execute(winSql);
+				String updateMemSql = "update member set money=money+"+payMoney+" where id="+memid;
+				preparedStatement.execute(updateMemSql);
+			}
+			if(exeCount % 100 == 0){
+				connection.commit();
+			}
+		}
+		connection.commit();
+		resultSet.close();
+		preparedStatementQuery.close();
 	}
 }

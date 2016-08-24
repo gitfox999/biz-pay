@@ -31,7 +31,7 @@ body {
 	.drpbg .ca:hover{color:#ccc;}
 </style>
 
-<body>
+<body style="background: transparent;">
 <div class="block" style="padding:0px 0px;">
 <div class="lottery_main" style="margin:10px;float:left;">
 <div class="ssc_right">
@@ -43,9 +43,9 @@ body {
     <span class="time">第 <font id="open_qihao">20160807098</font> 期<br>
         剩余<font id="whataction">投注</font>时间</span>
     <span class="ssc">重庆时时彩<br>
-        第 <font id="numbers">20160807096</font> 期</span>
+        第 <font id="numbers">20160101001</font> 期</span>
     <span class="zh" id="autoinfo"><span>正在开奖...</span></span><font>
-    <span class="sj" id="cqc_time" style="color: red;">02:37</span>
+    <span class="sj" id="cqc_time" style="color: red;">00:00</span>
     <div class="open_number"><img src="resource/images/lhj.gif"><img src="resource/images/lhj.gif"><img src="resource/images/lhj.gif"><img src="resource/images/lhj.gif"><img src="resource/images/lhj.gif"></div>
     <span id="cqc_sound" off="0"><img src="resource/images/on.png" title="关闭/打开声音"></span>
 </font></div><font>
@@ -55,7 +55,7 @@ body {
   <tbody><tr class="button_a">
       <td width="359" align="right" valign="middle" class="kg_a"><a href="http://www.89899b.com/app/member/Lottery/list.php" title="开奖结果" target="_blank"></a></td>
       <td width="10">&nbsp;</td>
-      <td width="391" align="left" valign="middle" class="gz_a"><a href="http://www.89899b.com/Rule/Rule_Cqssc.html" title="游戏规则" target="_blank"></a></td>
+      <td width="391" align="left" valign="middle" class="gz_a"><a href="rule.html" title="游戏规则" target="_blank"></a></td>
 
   </tr>
 </tbody></table>
@@ -63,11 +63,11 @@ body {
     <div class="touzhu">
 <form name="orders" action="order" method="post" target="OrderFrame">
     	<ul id="menu_hm">
-        	<li class="current_n" onclick="hm_odds(1)">第一球<span>(万位)</span></li>
+        	<li class="current" onclick="hm_odds(1)">第一球<span>(万位)</span></li>
             <li class="current_n" onclick="hm_odds(2)">第二球<span>(千位)</span></li>
             <li class="current_n" onclick="hm_odds(3)">第三球<span>(百位)</span></li>
             <li class="current_n" onclick="hm_odds(4)">第四球<span>(十位)</span></li>
-            <li class="current" onclick="hm_odds(5)">第五球<span>(个位)</span></li>
+            <li class="current_n" onclick="hm_odds(5)">第五球<span>(个位)</span></li>
 		</ul>
 <table class="bian" border="0" cellpadding="0" cellspacing="1">
             <tbody><tr class="bian_tr_title">

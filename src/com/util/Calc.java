@@ -10,10 +10,10 @@ import java.util.Date;
 import java.util.List;
 
 public class Calc {
-	public void Open(Date preTime,Date curNoDate) throws SQLException {
+	public void Open() throws SQLException {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String startTime = simpleDateFormat.format(preTime);;
-		String endTime = simpleDateFormat.format(curNoDate);
+		String startTime = simpleDateFormat.format(CurOrder.startDate);
+		String endTime = simpleDateFormat.format(CurOrder.endDate);
 		String openInfo = "";
 		String[] earnRatePathArray = {"0.15*0.25","0.05*0.15","0*0.05","0.25*0.5","0.5*1","-0.1*0"};
 		DbHelper dbHelper = new DbHelper();
@@ -28,7 +28,7 @@ public class Calc {
 		int[] nums = new int[5];
 		String[] openNumArray = new String[100000];
 		for(int j = 0;j< openNumArray.length;j++){
-			double payMoneyAll = 0;
+			int payMoneyAll = 0;
 			for(int i=0;i<5;i++){
 				int num = (int)(0+Math.random()*(9-0+1));
 				nums[i] = num;
@@ -38,30 +38,32 @@ public class Calc {
 			resultSet.beforeFirst();
 			while (resultSet.next()) {
 				String balltmp = resultSet.getInt("pos")+"_"+resultSet.getInt("num");
-				double payMoney = resultSet.getDouble("emoney");
+				int payMoney = resultSet.getInt("emoney");
 				for(String ballcur : strings){
 					if(ballcur.equals(balltmp)){
 						payMoneyAll += payMoney;
+						break;
 					}
 				}
 			}
-			double tmpEarnMoney = inMoney - payMoneyAll;
-			double earnRate = 0;
+			int tmpEarnMoney = inMoney - payMoneyAll;
+			double DearnRate = 0;
 			if(tmpEarnMoney != 0D){
-				earnRate = tmpEarnMoney / inMoney;
+				DearnRate = tmpEarnMoney*100 / inMoney;
 			}
+			int earnRate = (int)DearnRate;
 			openNumArray[j] = (j+1)+" "+getNo(nums)+" "+tmpEarnMoney+" "+String.valueOf(earnRate);
 		}
-		double minRate = 0,maxRate = 0,eartnRateTmp = 0;
+		int minRate = 0,maxRate = 0,eartnRateTmp = 0;
 		for (int i = 0; i < earnRatePathArray.length; i++) {
 			String earnRatePathTmp = earnRatePathArray[i];
 			String[] rateRangeArray = earnRatePathTmp.split("\\*");
-			minRate = Double.parseDouble(rateRangeArray[0]);
-			maxRate = Double.parseDouble(rateRangeArray[1]);
+			minRate = (int)Double.parseDouble(rateRangeArray[0])*100;
+			maxRate = (int)Double.parseDouble(rateRangeArray[1])*100;
 			boolean isHas = false;
 			for (int k = 0; k < openNumArray.length; k++) {
 				String[] openNumInfoArray = openNumArray[k].split(" ");
-				eartnRateTmp = Double.parseDouble(openNumInfoArray[3]);
+				eartnRateTmp = (int)Double.parseDouble(openNumInfoArray[3]);
 				if(eartnRateTmp >= minRate && eartnRateTmp <= maxRate){
 					isHas = true;
 					openInfo = openNumArray[k];
@@ -78,8 +80,9 @@ public class Calc {
 			nums[i] = num;
 		}
 		List<String> numRules = panduan(nums);
-		insertNo.insertAll(nums, curNoDate, numRules);
-		System.out.println(openInfo);
+		insertNo.insertAll(nums, CurOrder.endDate, numRules,openInfo,inMoney);
+		CurOrder.init();
+//		System.out.println(openInfo);
 	}
 	
 	public static boolean isShun(int a,int b,int c){

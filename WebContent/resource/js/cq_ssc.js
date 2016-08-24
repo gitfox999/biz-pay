@@ -40,7 +40,7 @@ function loadinfo(){
 				loadodds(data.oddslist);
 				iTime = data.opentime;
 				fp = setInterval("endtime()",1000);
-				setInterval("verifyTime()",10000);
+//				setInterval("verifyTime()",10000);
 				auto(1);
 			}else{
 				$(".bian_td_odds").html("-");
@@ -251,7 +251,6 @@ function endtime()
 function auto(ball){
 	$.post("class/auto_2.jsp", {ball : ball}, function(data)
 		{
-			iTime = data.itime;
 			$("#numbers").html(data.numbers);
 			var openqihao = $("#open_qihao").html();
 			if(auto_new == false || openqihao - data.numbers == 1 || data.numbers.indexOf("001") == 8){
@@ -276,13 +275,32 @@ function auto(ball){
 				for (var key in data.hmlist){
 					auto_top = auto_top+'<tr class="clbian_tr_txt"><td class="qihao">'+key+'</td><td class="haoma">'+data.hmlist[key]+'</td></tr>'
 				}
-			auto_top = auto_top+'</table>'
+			auto_top = auto_top+'</table>';
 			$("#auto_list",window.parent.document).html(auto_top);
 			//$(parent.leftFrame.document).find("#auto_list").html(auto_top);
 		}, "json");
 }
-//投注提交
 function order(){
+	var open_qihao = $("#open_qihao").html();
+	$.ajax({
+	    type: 'POST',
+	    url: "class/checkOpenQiHao.jsp",
+	    data:{open_qihao:open_qihao},
+	    dataType: 'json',
+	    success: function(data)
+		{
+			if(data.msg == "1"){
+				orderMain();
+			}else{
+				alert("该期已开奖，请刷新页面，重新下注！");
+			}
+		} 
+
+	});
+}
+
+//投注提交
+function orderMain(){
 	var tt = $("input.inp1");
 	var mix = 1; cou = m = 0, txt = '', c=true;
 	for (var i = 1; i < 10; i++){

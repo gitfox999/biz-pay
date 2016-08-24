@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 
 <title>金沙国际</title>
-<link href="http://www.js9588.com/cl/tpl/commonFile/css/standard.css" rel="stylesheet">
-<link href="http://www.js9588.com/cl/tpl/xinhao99/ver3/css/xinhao99.css" rel="stylesheet">
+<link href="resource/css/standard.css" rel="stylesheet">
+<link href="resource/css/xinhao99.css" rel="stylesheet">
 
 <style>/* header */
 .slogan{background: url('resource/images/slogan02.png') no-repeat 0 bottom;}

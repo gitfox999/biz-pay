@@ -19,7 +19,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.util.AllBall;
+import com.util.CurOrder;
 import com.util.DbHelper;
+import com.util.OrderExplain;
 
 /**
  * Servlet implementation class Order
@@ -43,9 +45,10 @@ public class Order extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		if(session.getAttribute("id") == null){
-			response.getWriter().println("<script type=\"text/javascript\">alert(\"您已登录超时，请重新登录！\")parent.location.href='index.jsp';</script>");
+			response.getWriter().write("<script type=\"text/javascript\">alert(\"您未登陆，请登录！\");parent.parent.location.href='index.jsp';</script>");
+			return;
 		}
-		double allMoney = Double.parseDouble(session.getAttribute("money").toString());
+		int allMoney = Integer.parseInt(session.getAttribute("money").toString());
 		String memId = session.getAttribute("id").toString();
 		Iterator<String> iterator = request.getParameterMap().keySet().iterator();
 		DbHelper dbHelper = new DbHelper();
@@ -54,23 +57,30 @@ public class Order extends HttpServlet {
 		String msg = "您的账户额度不足进行本次投注，请充值后在进行投注！";
 		List<String> sqlList = new ArrayList<String>();
 		double allWin = 0;
-		double sumCost = 0;
-		double curMoney = allMoney;
+		int sumCost = 0;
+		int curMoney = allMoney;
+		Map<String, String> orderMap = OrderExplain.getMap();
 		try {
 			connection.setAutoCommit(false);
 			while (iterator.hasNext()) {
 				String paramName = (String) iterator.next();
 				if(!"".equals(request.getParameter(paramName))){
 					String money = request.getParameter(paramName);
-					System.out.println(paramName+"--"+request.getParameter(paramName).toString());
+					int imoney = Integer.parseInt(money)*100;
 					//现征集呢是否足够
 					String[] balls = paramName.split("_");
-					sumCost += Double.parseDouble(money);
+					sumCost += imoney;
 					String nowStr = dateFormat.format(new Date());
-					double emoney = AllBall.getRate(Integer.parseInt(balls[1]), Integer.parseInt(balls[2]))*Double.parseDouble(money);
+					int emoney = (int)(AllBall.getRate(Integer.parseInt(balls[1]), Integer.parseInt(balls[2]))*100*Integer.parseInt(money));
 					allWin += emoney;
-					String sql = "insert into sscorder (pos,num,memid,otime,money,emoney)  values ("+balls[1]+","+balls[2]+",'"+memId+"','"+nowStr+"',"+money+","+emoney+")";
+					String detail = orderMap.get(balls[1]+"_"+balls[2]);
+					String sql = "insert into sscorder (pos,num,memid,otime,money,emoney,qihao,detail)  values ("+balls[1]+","+balls[2]+",'"+memId+"','"+nowStr+"',"+imoney+","+emoney+",'"+CurOrder.qishu+"','"+detail+"')";
+					
+					String remark = "期数："+CurOrder.qishu+",投注详情："+detail+",投注额："+imoney/100;
+					String flowSql = "insert into flow (memid,money,type,dirction,ts,remark) values ("+memId+","+imoney+",2,0,'"+nowStr+"','"+remark+"')";
+					
 					sqlList.add(sql);
+					sqlList.add(flowSql);
 					
 				}
 			}
@@ -84,7 +94,7 @@ public class Order extends HttpServlet {
 				curMoney = allMoney - sumCost;
 				preparedStatement.execute("update member set money = '"+curMoney+"' where id="+memId);
 				connection.commit();
-				msg = "投注完成！如果全中奖，你将获得"+allWin+"元奖金，祝您好运！";
+				msg = "投注完成！如果全中奖，你将获得"+((double)allWin)/100+"元奖金，祝您好运！";
 			}
 			dbHelper.closeAll(connection, preparedStatement, null);
 			session.setAttribute("money", curMoney);
@@ -95,7 +105,7 @@ public class Order extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		response.getWriter().println("<script type=\"text/javascript\">parent.parent.$(\"#user_money\").html(\""+curMoney+"\");parent.parent.layer.msg(\""+msg+"\", 4, 3);</script>");
+		response.getWriter().println("<script type=\"text/javascript\">parent.parent.$(\"#user_money\").html(\""+((double)curMoney)/100+"\");parent.parent.layer.msg(\""+msg+"\", 4, 3);</script>");
 	}
 
 	/**

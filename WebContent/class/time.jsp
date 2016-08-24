@@ -7,7 +7,7 @@
 <%
 	JobKey jobKey = new JobKey("job1","group1");
 	Date nextOpenTime = quartzdd.scheduler.getTriggersOfJob(jobKey).get(0).getNextFireTime();
-	long openTime = (nextOpenTime.getTime() - (new Date()).getTime())/1000;
+	long openTime = (nextOpenTime.getTime() - (new Date()).getTime())/1000+10;
 	StringBuffer sb = new StringBuffer("{\"itime\":\""+openTime+"\"}");
 	response.getWriter().print(sb.toString());
 %>

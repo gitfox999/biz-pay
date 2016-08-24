@@ -15,7 +15,7 @@
 	if(resultSet.next()){
 		int id = resultSet.getInt("id");
 		session.setAttribute("name", name);
-		session.setAttribute("money", resultSet.getDouble("money"));
+		session.setAttribute("money", resultSet.getInt("money"));
 		session.setAttribute("id", id);
 		dbHelper.closeAll(connection, preparedStatement, resultSet);
 		response.getWriter().print("4");

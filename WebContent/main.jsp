@@ -295,32 +295,20 @@ function gbc() { document.getElementById('123-gq').style.display='none'; }
             <div class="mainnav-wrap floatR">
                 <ul class="mainnav clearfix">
                     <li>
-                        <a href="javascript:GoTo('1','Home');" class="current">首页</a>
+                        <a href="javascript:GoTo('1','main');" class="current">首页</a>
                     </li>
-                    <li onmouseout="javascript:gbc()" onmouseover="javascript:xsc()">
-                        <a href="javascript:crownsports();">体育赛事</a>
-                        
-         <ul class="subnav11" id="123-gq" style="display:none;">
-         <span>
-         <a onmouseout="javascript:gbc()" onmouseover="javascript:xsc()" href="javascript:bstiyu();">BS体育</a>
-       
-         <a onmouseout="javascript:gbc()" onmouseover="javascript:xsc()" href="javascript:crownsports();">皇冠体育</a>
-         </span>
-         </ul>
-         
-                        
-     </li>
-                        
-                        
+                    <li>
+                        <a href="javascript:GoTo('1','rule');">游戏规则</a>
+                    </li>
                     
                     <li>
-                        <a href="javascript:GoTo('1','Live');">视讯直播</a>
+                        <a href="javascript:GoTo('1','reg');">申请开户</a>
                     </li>
                     <li>
-                        <a href="javascript:GoTo('1','Game');">电子游艺</a>
+                        <a href="javascript:void(0);" onclick="GoToMember(1,0);return false">我要充值</a>
                     </li>
                     <li>
-                        <a href="javascript:GoTo('1','Lottery');">彩票游戏</a>
+                        <a href="javascript:GoTo('1','Lottery');">我要提款</a>
                     </li>
                     <li>
                         <a href="javascript:wap();">手机下注</a>
@@ -375,9 +363,15 @@ function gbc() { document.getElementById('123-gq').style.display='none'; }
                 %>
                 <div class="mem-info floatL">
                 会员帐号：<strong class="logged-data"><%=session.getAttribute("name").toString() %></strong>
-                                &nbsp;&nbsp;|&nbsp;&nbsp;账户余额：<strong class="logged-data" id="user_money"><%=session.getAttribute("money").toString() %></strong>
+                                &nbsp;&nbsp;|&nbsp;&nbsp;账户余额：<strong class="logged-data" id="user_money"><%=Double.parseDouble(session.getAttribute("money").toString())/100 %></strong>
                                 &nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:void(0);" onclick="GoToMember(1,0);return false"><font color="#FFFFFF">线上存款</font></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:void(0);" onclick="GoToMember(1,1);return false"><font color="#FFFFFF">申请提款</font></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:void(0);" onclick="GoToMember(1,2);return false"><font color="#FFFFFF">额度转换</font></a>
                             </div>
+                 <!--  sub  -->
+	            <div class="SU-Menual floatR">
+	                <ul class="login-Menual clearfix">
+	                    <li><a href="javascript:void(0);" onclick="GoToMember(2,0);return false"><font color="#FFFFFF">投注记录</font></a> | <a href="javascript:void(0);" onclick="GoToMember(3,0);return false"><font color="#FFFFFF">历史报表</font></a> | <a href="javascript:void(0);" onclick="GoToMember(0 ,0);return false"><font color="#FFFFFF">会员中心</font></a> | <a href="javascript:void(0);" onclick="GoToMember(4,0);return false"><font color="#FFFFFF">站内短信（<font id="user_sms">0</font>）</font></a> | <a href="javascript:void(0);" onclick="GoTo(&#39;1&#39;,&#39;logout&#39;);return false"><font color="#FFFFFF">退出登录</font></a></li>
+	                                </ul>
+	            </div>
                 <%} %>
             </div>            </div>            <div id="page-container">
     <div id="page-body" class="clearfix">

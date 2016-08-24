@@ -85,11 +85,12 @@ function GoTo(type,url,mulu){
 	// class = 1 根目录跳转
 	// class = 2 直接跳转目录
 	// class = 3 根据指定目录跳转
+	debugger;
 	if(type=='0'){
 		window.open('/'+url+'.php',"newFrame");
 	}
 	if(type=='1'){
-		window.location.href='/'+url+'.php';
+		window.location.href=''+url+'.jsp';
 	}
 	if(type=='2'){
 		window.location.href='/'+url+'/';
@@ -116,7 +117,7 @@ function LoadUserInfo(){
 	setTimeout("LoadUserInfo()",15000);
 }
 function GoToMember(Args1,Args2){
-	window.open('/Member/?Args1='+Args1+'&Args2='+Args2,"newFrame");
+	window.open('member.jsp?Args1='+Args1+'&Args2='+Args2,"newFrame");
 }
 
 function Go_forget_pwd() {
