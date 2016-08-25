@@ -192,12 +192,12 @@ function TakeMoney() {
     if (Num > 5) {
         if (confirm('您今日的提款已经超过【5次】！\n\n每笔提款我们将收取50元手续费作为行政费用！\n\n您确定还要继续提款吗？')) {
             $("#button").attr("disabled", "true");
-            $.post("Take_Money.php", {T: Math.random(), Money: Money, MoneyPass: MoneyPass, Key: Key, Num: Num}, function (data)
+            $.post("class/take.jsp", {T: Math.random(), Money: Money, MoneyPass: MoneyPass, Key: Key, Num: Num}, function (data)
             {
                 if (data.ok > 0) {
                     $("#loading").hide();
                     alert('提款申请成功！\n\n财务部门将在审核过后，将您的提款金额存入您的提款账号中！\n\n您也可以到会员中心【提现记录】里查询您的提款状态！');
-                    Go('TakeList.php');
+                    Go('takelist.jsp');
                     return false;
                 }
                 if (data.ok == 0) {
@@ -212,12 +212,12 @@ function TakeMoney() {
         }
     } else {
         $("#button").attr("disabled", "true");
-        $.post("Take_Money.php", {T: Math.random(), Money: Money, MoneyPass: MoneyPass, Key: Key, Num: Num}, function (data)
+        $.post("class/take.jsp", {T: Math.random(), Money: Money, MoneyPass: MoneyPass, Key: Key, Num: Num}, function (data)
         {
             if (data.ok > 0) {
                 $("#loading").hide();
                 alert('提款申请成功！\n\n财务部门将在审核过后，将您的提款金额存入您的提款账号中！\n\n您也可以到会员中心【提现记录】里查询您的提款状态！');
-                Go('TakeList.php');
+                Go('takelist.jsp');
                 return false;
             }
             if (data.ok == 0) {

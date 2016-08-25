@@ -1,5 +1,31 @@
+<%@page import="com.util.CurOrder"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="com.util.DbHelper"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+    
+<%
+	if(session.getAttribute("trueName") == null){
+		response.sendRedirect("save_card.jsp");
+	}
+	String id = session.getAttribute("id").toString();
+	DbHelper dbHelper = new DbHelper();
+	Connection connection = dbHelper.getConnection();
+	PreparedStatement preparedStatement = connection.prepareStatement("select * from member where id = '"+id+"'");
+	ResultSet resultSet = preparedStatement.executeQuery();
+	resultSet.next();
+	String bank = resultSet.getString("bank");
+	String card = resultSet.getString("card");
+	String bankpos = resultSet.getString("bankpos");
+	double money = CurOrder.getTrueMoney(resultSet.getInt("money"));
+	String name = resultSet.getString("name");
+	String trueName = resultSet.getString("trueName");
+	dbHelper.closeAll(connection, preparedStatement, resultSet);
+%>    
+    
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0042)http://www.7378b.com/Member/Money/Take.php -->
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,11 +41,11 @@
         <table width="100%" border="0" cellspacing="0" cellpadding="5">
           <tbody><tr>
             <td align="right">会员账号：</td>
-            <td>ASDFQWER</td>
+            <td><%=name %></td>
           </tr>
           <tr>
             <td width="150" align="right">总账户余额：</td>
-            <td><font style="font-size:14px;color:#F00; font-weight:bold">0</font> （各真人娱乐厅的额度需先转回总账户，才可以进行提款）</td>
+            <td><font style="font-size:14px;color:#F00; font-weight:bold"><%=money %></font></td>
           </tr>
           <tr>
             <td align="right">提款金额：</td>
@@ -31,23 +57,19 @@
           </tr>
           <tr>
             <td align="right">收款银行：</td>
-            <td><font color="#0000FF">afqwerqwer</font></td>
+            <td><font color="#0000FF"><%=bank %></font></td>
           </tr>
           <tr>
             <td align="right">银行户名：</td>
-            <td><font color="#0000FF">往往娃娃</font></td>
+            <td><font color="#0000FF"><%=trueName %></font></td>
           </tr>
           <tr>
             <td align="right">银行账号：</td>
-            <td style="font-size:14px;color:#F00; font-weight:bold">123123123123123</td>
+            <td style="font-size:14px;color:#F00; font-weight:bold"><%=card %></td>
           </tr>
           <tr>
             <td align="right">开户行地址：</td>
-            <td><font color="#0000FF">北京市北京辖区东城区xx街xx支行</font></td>
-          </tr>
-          <tr>
-            <td align="right">请输入您的资金密码：</td>
-            <td><input type="password" id="MoneyPass" name="MoneyPass" class="Input_100"></td>
+            <td><font color="#0000FF"><%=bankpos %></font></td>
           </tr>
           <!--<tr>
             <td align="right">&nbsp;</td>
@@ -59,6 +81,6 @@
         </tbody></table>
     </ul>
   </div>
-<div id="loading"><img src="load.gif"><br>提交申请中，请稍等...</div>
+<div id="loading"><img src="resource/images/load.gif"><br>提交申请中，请稍等...</div>
 
 </body></html>

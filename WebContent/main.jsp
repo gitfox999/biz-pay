@@ -1,5 +1,14 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="com.sun.org.apache.bcel.internal.generic.SIPUSH"%>
+<%@page import="com.util.CurOrder"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+	String dateNow = dateFormat.format(new Date());
+	long curTime = (new Date()).getTime();
+%>
 <!DOCTYPE html>
 <!-- saved from url=(0037)http://www.js9588.com/Lottery/Csc.php -->
 <html class="madvertis zh-cn at1"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -170,7 +179,7 @@ $(document).ready(function (e) {
     #ele-logo-img { background-position: 0 0; }
 </style>
 <script type="text/javascript">
-        var current = 1471131001000 || 0;
+        var current = <%=curTime%> || 0;
 
         /**
          * 即時時間顯示
@@ -256,13 +265,13 @@ $(document).ready(function (e) {
 
 
 
-                                    <a href="javascript:f_com.bookmarksite('http://www.5887788.com','金沙国际');" title="加入最爱">加入最爱</a>
+                                    <a href="javascript:f_com.bookmarksite('<%=CurOrder.url %>','金沙国际');" title="加入最爱">加入最爱</a>
                     &nbsp;|&nbsp;
-                    <a href="http://www.js9588.com/Lottery/Csc.php###" onclick="javascript:AboutUs(8);;" title="代理合作">代理合作</a>
+                    <a href="javascript:alert('计划正在拟定中，谢谢您的关注！')" title="代理合作">代理合作</a>
                     &nbsp;|&nbsp;
-                    <a href="javascript:f_com.setHomepage('http://www.5887788.com');" title="设为首页">设为首页</a>
+                    <a href="javascript:f_com.setHomepage('<%=CurOrder.url %>');" title="设为首页">设为首页</a>
                     
-                <!-- est --><p class="topTime b_r" id="EST_reciprocal">美东时间：2016/08/14 - 07:30:56</p>
+                <!-- est --><p class="topTime b_r" id="EST_reciprocal">美东时间：<%=dateNow %></p>
                 <div class="est-wrap">
                  
                                    </div>                                  
@@ -308,10 +317,10 @@ function gbc() { document.getElementById('123-gq').style.display='none'; }
                         <a href="javascript:void(0);" onclick="GoToMember(1,0);return false">我要充值</a>
                     </li>
                     <li>
-                        <a href="javascript:GoTo('1','Lottery');">我要提款</a>
+                        <a href="javascript:void(0);" onclick="GoToMember(1,1);return false">我要提款</a>
                     </li>
                     <li>
-                        <a href="javascript:wap();">手机下注</a>
+                        <a href="javascript:alert('该功能尚未开通，敬请期待！');">手机下注</a>
                     </li>
                     <li>
                         <a href="javascript:GoTo('1','Hot');" id="nav-promotions" style="color: rgb(255, 255, 0);">优惠活动</a>
@@ -364,12 +373,12 @@ function gbc() { document.getElementById('123-gq').style.display='none'; }
                 <div class="mem-info floatL">
                 会员帐号：<strong class="logged-data"><%=session.getAttribute("name").toString() %></strong>
                                 &nbsp;&nbsp;|&nbsp;&nbsp;账户余额：<strong class="logged-data" id="user_money"><%=Double.parseDouble(session.getAttribute("money").toString())/100 %></strong>
-                                &nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:void(0);" onclick="GoToMember(1,0);return false"><font color="#FFFFFF">线上存款</font></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:void(0);" onclick="GoToMember(1,1);return false"><font color="#FFFFFF">申请提款</font></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:void(0);" onclick="GoToMember(1,2);return false"><font color="#FFFFFF">额度转换</font></a>
+                                &nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:void(0);" onclick="GoToMember(1,0);return false"><font color="#FFFFFF">线上存款</font></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:void(0);" onclick="GoToMember(1,1);return false"><font color="#FFFFFF">申请提款</font></a>&nbsp;&nbsp;
                             </div>
                  <!--  sub  -->
 	            <div class="SU-Menual floatR">
 	                <ul class="login-Menual clearfix">
-	                    <li><a href="javascript:void(0);" onclick="GoToMember(2,0);return false"><font color="#FFFFFF">投注记录</font></a> | <a href="javascript:void(0);" onclick="GoToMember(3,0);return false"><font color="#FFFFFF">历史报表</font></a> | <a href="javascript:void(0);" onclick="GoToMember(0 ,0);return false"><font color="#FFFFFF">会员中心</font></a> | <a href="javascript:void(0);" onclick="GoToMember(4,0);return false"><font color="#FFFFFF">站内短信（<font id="user_sms">0</font>）</font></a> | <a href="javascript:void(0);" onclick="GoTo(&#39;1&#39;,&#39;logout&#39;);return false"><font color="#FFFFFF">退出登录</font></a></li>
+	                    <li><a href="javascript:void(0);" onclick="GoToMember(2,0);return false"><font color="#FFFFFF">投注记录</font></a> | <a href="javascript:void(0);" onclick="GoToMember(3,0);return false"><font color="#FFFFFF">历史报表</font></a> | <a href="javascript:void(0);" onclick="GoToMember(0 ,0);return false"><font color="#FFFFFF">会员中心</font></a> | <a href="javascript:void(0);" onclick="GoToMember(4,0);return false"><font color="#FFFFFF">站内短信（<font id="user_sms">0</font>）</font></a> | <a href="javascript:void(0);" onclick="GoTo(1,'class/loginout');return false"><font color="#FFFFFF">退出登录</font></a></li>
 	                                </ul>
 	            </div>
                 <%} %>
