@@ -12,7 +12,7 @@
 </head>
 <frameset rows="*,0,0" frameborder="NO" border="0" framespacing="0"> 
 <frame name="index" src="main.jsp?">
-<frame name="func" scrolling="NO" noresize="" src="./澳门金沙国际 欢迎您_files/ok.html">
+<frame name="func" noresize="" src=".">
 <frame src="./澳门金沙国际 欢迎您_files/UntitledFrame-5.html"></frameset>
 <noframes>&lt;body&gt;
 &lt;/body&gt;
