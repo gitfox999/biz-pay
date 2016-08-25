@@ -9,19 +9,11 @@
 <link rel="stylesheet" type="text/css" href="resource/css/jquery-ui.css">
 <script type="text/javascript" src="resource/js/jquery.js"></script>
 <script type="text/javascript" src="resource/js/member.js"></script>
-<script type="text/javascript" src="resource/js/jquery-ui-datepicker.js"></script>
-<script type="text/javascript">
-$(function(){
-	$("#S_date").datepicker({
-		minDate: -31,
-		maxDate: 0
-	});
-	$("#E_date").datepicker({
-		minDate: -31,
-		maxDate: 0
-	});
-});
-</script>
+<script src="resource/js/jquery.ui.core.min.js"></script>
+<script src="resource/js/jquery.ui.widget.min.js"></script>
+<script src="resource/js/jquery.ui.datepicker.min.js"></script>
+<script src="resource/js/jquery.ui.datepicker-zh-CN.js"></script>
+
 </head>
 <body>
   <div class="ui-moneyBox">
@@ -72,5 +64,15 @@ $(function(){
     </ul>
   </div>
 <script language="javascript">bianse("thetable","#F5F5F5","#FFFFFF","#FFFFCC","#FFFFCC");</script> 
-
+<script type="text/javascript">
+	alert();
+	$("#S_date").datepicker({
+		minDate: -31,
+		maxDate: 0
+	});
+	$("#E_date").datepicker({
+		minDate: -31,
+		maxDate: 0
+	});
+</script>
 <div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div></body></html>

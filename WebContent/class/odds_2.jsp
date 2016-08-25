@@ -6,9 +6,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%
-	if(CurOrder.endDate == null){
-		CurOrder.init();
-	}
 	long openTime = (CurOrder.endDate.getTime() - (new Date()).getTime())/1000+10;
 	StringBuffer sb = new StringBuffer("{\"number\":\""+CurOrder.qishu+"\",\"endtime\":84,\"opentime\":"+openTime
 			+ ",\"oddslist\":{\"ball\":{");

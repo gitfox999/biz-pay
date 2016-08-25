@@ -9,9 +9,6 @@
 <%
 	SimpleDateFormat dateFormat_day_no = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat dateFormat_day = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	if(CurOrder.endDate == null){
-		CurOrder.init();
-	}
 	Map<String,Object> zuijin = CurOrder.list.get(0);
 	String openNum = zuijin.get("no").toString();
 	char[] charNumArray = openNum.toCharArray();
@@ -27,7 +24,7 @@
 	String qian = zuijin.get("qiansan").toString();
 	String zhong = zuijin.get("zhongsan").toString();
 	String hou = zuijin.get("housan").toString();
-	StringBuffer sb = new StringBuffer("{\"numbers\":\""+CurOrder.preQishu+"\",\"hm\":[\""+nums[0]+"\",\""+nums[1]+"\",\""+nums[2]+"\",\""+nums[3]+"\",\""+nums[4]+"\"]"
+	StringBuffer sb = new StringBuffer("{\"isok\":\""+CurOrder.isOk+"\",\"numbers\":\""+CurOrder.preQishu+"\",\"hm\":[\""+nums[0]+"\",\""+nums[1]+"\",\""+nums[2]+"\",\""+nums[3]+"\",\""+nums[4]+"\"]"
 			+ ",\"hms\":["+sum+",\""+daxiao+"\",\""+danshuang+"\",\""+longhuhe+"\",\""+qian+"\",\""+zhong+"\",\""+hou+"\"],\"hmlist\":{");
 	Iterator<Map<String,Object>> iterator = CurOrder.list.iterator();
 	iterator.next();

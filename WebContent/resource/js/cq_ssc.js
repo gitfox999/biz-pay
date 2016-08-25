@@ -1,4 +1,4 @@
-var bool = auto_new = false;
+var bool = false;
 var sound_off=0;
 var ball_odds = cl_hao = cl_dx = cl_ds = cl_zhdx = cl_zhds = cl_lh ='';
 var fp,iTime,isFirstLoad = true;
@@ -253,7 +253,8 @@ function auto(ball){
 		{
 			$("#numbers").html(data.numbers);
 			var openqihao = $("#open_qihao").html();
-			if(auto_new == false || openqihao - data.numbers == 1 || data.numbers.indexOf("001") == 8){
+			var isOk = data.isok;
+			if(isOk == "true"){
 				var numinfo='';
 				numinfo = numinfo+'总和：<span><font>'+data.hms[0]+'</font></span>&nbsp;&nbsp;<span><font>'+data.hms[1]+'</font></span>&nbsp;&nbsp;<span><font>'+data.hms[2]+'</font></span>&nbsp;&nbsp;&nbsp;龙虎：<span><font>'+data.hms[3]+'</font></span><br>前三：<span><font>'+data.hms[4]+'</font></span>&nbsp;中三：<span><font>'+data.hms[5]+'</font></span>&nbsp;后三：<span><font>'+data.hms[6]+'</font></span>';
 				$("#autoinfo").html(numinfo);
@@ -266,8 +267,7 @@ function auto(ball){
 					i++;
 					fun--;
 				});
-				auto_new = true;
-				if(openqihao - data.numbers != 1){xhm = setTimeout("auto(1)",3000);}
+				if(isOk != "true"){xhm = setTimeout("auto(1)",3000);}
 			}else{
 				xhm = setTimeout("auto(1)",3000);
 			}

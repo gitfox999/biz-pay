@@ -18,7 +18,7 @@ public class HelloJob implements Job {
     		CurOrder.startDate = arg0.getPreviousFireTime();
     		CurOrder.endDate = arg0.getFireTime();
 	    	//第一次运行时记得减去10分钟，因为获取不到上一次执行时间
-	    	if(CurOrder.startDate == null){
+	    	/**if(CurOrder.startDate == null){
 //	    		Calendar cal = Calendar.getInstance();
 //	            cal.setTime(CurOrder.endDate);
 //	            cal.add(Calendar.MINUTE, -10);
@@ -30,7 +30,7 @@ public class HelloJob implements Job {
 					e.printStackTrace();
 				}
 	    		return;
-	    	}
+	    	}**/
     	}else{
 	    	Calc calc = new Calc();
 	    	try {

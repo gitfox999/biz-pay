@@ -22,8 +22,10 @@ public class CurOrder {
 	public static int curTimes;
 	public static String qishu;
 	public static String preQishu;
+	public static String preNo;
 	public static List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 	public static String url = "http://localhost:8080/biz-pay/";
+	public static boolean isOk = false;
 	
 	public static void resultSetToList(ResultSet rs) throws java.sql.SQLException {   
 		list = new ArrayList<Map<String,Object>>();
@@ -43,62 +45,94 @@ public class CurOrder {
 	public static void init() throws SQLException{
 		JobKey jobKey = new JobKey("job1","group1"); 
 		SimpleDateFormat dateFormat_day_no = new SimpleDateFormat("yyyyMMdd");
-		Date nextOpenTime = null;
-		Date preTime = null;
+		
 		try {
-			nextOpenTime = quartzdd.scheduler.getTriggersOfJob(jobKey).get(0).getNextFireTime();
-			preTime = quartzdd.scheduler.getTriggersOfJob(jobKey).get(0).getPreviousFireTime();
+			endDate = quartzdd.scheduler.getTriggersOfJob(jobKey).get(0).getNextFireTime();
+			startDate = quartzdd.scheduler.getTriggersOfJob(jobKey).get(0).getPreviousFireTime();
 			if(quartzdd.scheduler.getCurrentlyExecutingJobs().size() > 0){
-				preTime = quartzdd.scheduler.getCurrentlyExecutingJobs().get(0).getFireTime();
-				nextOpenTime = quartzdd.scheduler.getCurrentlyExecutingJobs().get(0).getNextFireTime();
+				startDate = quartzdd.scheduler.getCurrentlyExecutingJobs().get(0).getFireTime();
+				endDate = quartzdd.scheduler.getCurrentlyExecutingJobs().get(0).getNextFireTime();
 			}
+			if(startDate == null){
+        		Calendar cal = Calendar.getInstance();
+                cal.setTime(endDate);
+                cal.add(Calendar.MINUTE, -10);
+                startDate = cal.getTime();
+        	}
 		} catch (SchedulerException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	//第一次运行时记得减去10分钟，因为获取不到上一次执行时间
-    	if(preTime == null){
-    		Calendar cal = Calendar.getInstance();
-            cal.setTime(nextOpenTime);
-            cal.add(Calendar.MINUTE, -10);
-            preTime = cal.getTime();
-    	}
-    	startDate = preTime;
-    	endDate = nextOpenTime;
     	
-    	//查询最近所有的开奖结果
+		//查询最近所有的开奖结果
     	DbHelper dbHelper = new DbHelper();
     	Connection connection = dbHelper.getConnection();
     	PreparedStatement preparedStatement = connection.prepareStatement("select * from ssc order by id desc limit 0,25");
     	ResultSet resultSet = preparedStatement.executeQuery();
-    	String nextDate_day = dateFormat_day_no.format(nextOpenTime);
+    	String nextDate_day = dateFormat_day_no.format(startDate);
     	curTimes = 1;
-    	int preTimes =1;
-    	String preDate = dateFormat_day_no.format(nextOpenTime);
     	if(resultSet.next()){
-    		preTimes = resultSet.getInt("times");
+    		startDate = resultSet.getDate("time");
     		if(nextDate_day.equals(dateFormat_day_no.format(resultSet.getDate("time")))){
     			curTimes = resultSet.getInt("times")+1;
-    			
     		}
-    		//不能用before，不然如果开奖时间和触发时间相同的话，也会触发加一。
-    		if(dateFormat_day_no.format(preTime).equals(dateFormat_day_no.format(resultSet.getDate("time")))
-    			&& preTime.getTime() - resultSet.getTimestamp("time").getTime() > 1000
-    			&& preTime.getTime() - resultSet.getTimestamp("time").getTime() < 1000*60*15){
-//    			preTimes++;
-    			curTimes++;
-    		}
+//    		//不能用before，不然如果开奖时间和触发时间相同的话，也会触发加一。
+//    		if(dateFormat_day_no.format(startDate).equals(dateFormat_day_no.format(resultSet.getDate("time")))
+//    			&& startDate.getTime() - resultSet.getTimestamp("time").getTime() > 1000
+//    			&& startDate.getTime() - resultSet.getTimestamp("time").getTime() < 1000*60*15){
+//    			curTimes++;
+//    		}
+    		preQishu = resultSet.getString("qihao");
+    		preNo = resultSet.getString("no");
 //    		if(!nextDate_day.equals(dateFormat_day_no.format(resultSet.getDate("time")))
 //    				&& resultSet.getDate("time").before(preTime)){
 //    			preDate = dateFormat_day_no.format(nextOpenTime);
 //    		}
     	}
+    	
     	String str_times = String.format("%03d", curTimes);
-    	qishu = dateFormat_day_no.format(nextOpenTime)+str_times;
-    	preQishu = preDate + String.format("%03d", preTimes);
+    	qishu = dateFormat_day_no.format(startDate)+str_times;
     	resultSet.beforeFirst();
     	resultSetToList(resultSet);
     	dbHelper.closeAll(connection, preparedStatement, resultSet);
+    	isOk = true;
+	}
+	
+	public static void beforeOpen() throws SQLException{
+		isOk = false;
+		SimpleDateFormat dateFormat_day_no = new SimpleDateFormat("yyyyMMdd");
+		Date preStartDate = startDate;
+		try {
+			startDate = quartzdd.scheduler.getCurrentlyExecutingJobs().get(0).getFireTime();
+			endDate = quartzdd.scheduler.getCurrentlyExecutingJobs().get(0).getNextFireTime();
+		} catch (SchedulerException e) {
+			e.printStackTrace();
+		}
+    	
+		//查询最近所有的开奖结果
+    	String nextDate_day = dateFormat_day_no.format(startDate);
+    	int curTimesTmp = 1;
+		if(nextDate_day.equals(dateFormat_day_no.format(preStartDate))){
+			curTimesTmp = curTimes+1;
+		}
+		curTimes = curTimesTmp;
+		String str_times = String.format("%03d", curTimes);
+    	qishu = dateFormat_day_no.format(startDate)+str_times;
+	}
+	
+	public static void loaded() throws SQLException{
+		//查询最近所有的开奖结果
+    	DbHelper dbHelper = new DbHelper();
+    	Connection connection = dbHelper.getConnection();
+    	PreparedStatement preparedStatement = connection.prepareStatement("select * from ssc order by id desc limit 0,25");
+    	ResultSet resultSet = preparedStatement.executeQuery();
+    	if(resultSet.next()){
+    		preQishu = resultSet.getString("qihao");
+    		preNo = resultSet.getString("no");
+    	}
+    	resultSet.beforeFirst();
+    	resultSetToList(resultSet);
+    	dbHelper.closeAll(connection, preparedStatement, resultSet);
+		isOk= true;
 	}
 	
 	public static boolean isCanOrder(String openQihao){

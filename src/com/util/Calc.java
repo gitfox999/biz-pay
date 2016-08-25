@@ -12,8 +12,13 @@ import java.util.List;
 public class Calc {
 	public void Open() throws SQLException {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String startTime = simpleDateFormat.format(CurOrder.startDate);
-		String endTime = simpleDateFormat.format(CurOrder.endDate);
+		Date thisDoStartTime = CurOrder.startDate;
+		Date thisDoEndTime = CurOrder.endDate;
+		String thisDoQihao = CurOrder.qishu;
+		int thisDoTims = CurOrder.curTimes;
+		String startTime = simpleDateFormat.format(thisDoStartTime);
+		String endTime = simpleDateFormat.format(thisDoEndTime);
+		CurOrder.beforeOpen();
 		String openInfo = "";
 		String[] earnRatePathArray = {"0.15*0.25","0.05*0.15","0*0.05","0.25*0.5","0.5*1","-0.1*0"};
 		DbHelper dbHelper = new DbHelper();
@@ -80,9 +85,8 @@ public class Calc {
 			nums[i] = num;
 		}
 		List<String> numRules = panduan(nums);
-		insertNo.insertAll(nums, CurOrder.endDate, numRules,openInfo,inMoney);
-		CurOrder.init();
-//		System.out.println(openInfo);
+		insertNo.insertAll(nums,numRules,openInfo,inMoney,thisDoStartTime,thisDoEndTime,thisDoQihao,thisDoTims);
+		CurOrder.loaded();
 	}
 	
 	public static boolean isShun(int a,int b,int c){

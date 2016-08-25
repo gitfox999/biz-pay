@@ -11,11 +11,10 @@ import java.util.List;
 
 public class InsertNo {
 	//如果openInfo等于空的话，应回归订单
-	public void insertAll(int[] nums,Date curNoDate,List<String> numRules,String openInfo,int inmoney) throws SQLException{
-		SimpleDateFormat dateFormat_day = new SimpleDateFormat("yyyy-MM-dd");
+	public void insertAll(int[] nums,List<String> numRules,String openInfo,int inmoney,Date startTime,Date endTime,String qishu,int times) throws SQLException{
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String noStr = "",preRowNo="";
-		int id=1,max = 0,min =9,sum=0,cross=0,times =1;
+		int id=1,max = 0,min =9,sum=0,cross=0;
 		DbHelper dbHelper = new DbHelper();
 		Connection connection = dbHelper.getConnection();
 		connection.setAutoCommit(false);
@@ -23,9 +22,6 @@ public class InsertNo {
 		ResultSet resultSet = preparedStatement.executeQuery();
 		if(resultSet.next()){
 			id = resultSet.getInt("id")+1;
-			if(dateFormat_day.format(curNoDate).equals(dateFormat_day.format(resultSet.getDate("time")))){
-				times = resultSet.getInt("times")+1;
-			}
 			preRowNo = resultSet.getString("no");
 		}
 		for (int i : nums) {
@@ -81,20 +77,20 @@ public class InsertNo {
 				hou = "半顺";
 			}
 		}
-		String stime = dateFormat.format(CurOrder.startDate);
-		String etime = dateFormat.format(CurOrder.endDate);
+		String stime = dateFormat.format(startTime);
+		String etime = dateFormat.format(endTime);
 		String[] openNumInfoArray = openInfo.split(" ");
 		int eartnRateTmp = Integer.parseInt(openNumInfoArray[3]);
 		int eartMoney = Integer.parseInt(openNumInfoArray[2]);
 		preparedStatement = connection.prepareStatement("insert into ssc values ("+id+",'"+noStr+"',"+sum+","+cross+",'"+nowStr+"',"+times
-				+",'"+CurOrder.qishu+"','"+daxiao+"','"+danshuang+"','"+longhuhe+"','"+qian+"','"+zhong+"','"+hou+"','"+stime+"','"+etime
+				+",'"+qishu+"','"+daxiao+"','"+danshuang+"','"+longhuhe+"','"+qian+"','"+zhong+"','"+hou+"','"+stime+"','"+etime
 				+"',"+eartMoney+","+inmoney+","+eartnRateTmp+")");
 		preparedStatement.execute();
 		connection.commit();
 		resultSet = preparedStatement.executeQuery("select * from ssc order by id desc limit 0,1");
 		resultSet.next();
 		int newSscId = resultSet.getInt("id")+1;
-		fenzhang(connection,preparedStatement,numRules,newSscId,noStr);
+		fenzhang(connection,preparedStatement,numRules,newSscId,noStr,startTime,endTime,qishu);
 		dbHelper.closeAll(connection, preparedStatement, resultSet);
 	}
 	
@@ -157,11 +153,11 @@ public class InsertNo {
 		preparedStatement.execute(sql);
 	}
 	
-	private void fenzhang(Connection connection,PreparedStatement preparedStatement,List<String> numRules,int sscid,String num) throws SQLException{
+	private void fenzhang(Connection connection,PreparedStatement preparedStatement,List<String> numRules,int sscid,String num,Date startTime,Date endTime,String qishu) throws SQLException{
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String startTime = simpleDateFormat.format(CurOrder.startDate);
-		String endTime = simpleDateFormat.format(CurOrder.endDate);
-		PreparedStatement preparedStatementQuery = connection.prepareStatement("select * from sscorder where otime >= '"+startTime+"' and otime <= '"+endTime+"'");
+		String strStartTime = simpleDateFormat.format(startTime);
+		String strEndTime = simpleDateFormat.format(endTime);
+		PreparedStatement preparedStatementQuery = connection.prepareStatement("select * from sscorder where otime >= '"+strStartTime+"' and otime <= '"+strEndTime+"'");
 		ResultSet resultSet = preparedStatementQuery.executeQuery();
 		int exeCount = 0;
 		while (resultSet.next()) {
@@ -180,7 +176,7 @@ public class InsertNo {
 			if(isWin == 1){
 				int memid = resultSet.getInt("memid");
 				String nowStr = simpleDateFormat.format(new Date());
-				String remark = "期数："+CurOrder.qishu+",开奖号码："+num+",投注详情："+resultSet.getString("detail")+",投注额："+(((double)resultSet.getInt("emoney"))/100);
+				String remark = "期数："+qishu+",开奖号码："+num+",投注详情："+resultSet.getString("detail")+",投注额："+(((double)resultSet.getInt("emoney"))/100);
 				String winSql = "insert into flow (memid,money,type,dirction,ts,remark) values ("+memid+","+payMoney+",3,1,'"+nowStr+"','"+remark+"')";
 				preparedStatement.execute(winSql);
 				String updateMemSql = "update member set money=money+"+payMoney+" where id="+memid;
