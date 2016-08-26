@@ -7,6 +7,5 @@
 	if(CurOrder.isCanOrder(open_qihao)){
 		msg = 1;
 	}
-	System.out.println(msg);
 	out.write("{\"msg\":"+msg+"}");
 %>

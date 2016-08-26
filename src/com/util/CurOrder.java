@@ -71,7 +71,7 @@ public class CurOrder {
     	String nextDate_day = dateFormat_day_no.format(startDate);
     	curTimes = 1;
     	if(resultSet.next()){
-    		startDate = resultSet.getDate("time");
+    		startDate = resultSet.getTimestamp("etime");
     		if(nextDate_day.equals(dateFormat_day_no.format(resultSet.getDate("time")))){
     			curTimes = resultSet.getInt("times")+1;
     		}

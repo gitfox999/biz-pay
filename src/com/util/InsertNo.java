@@ -80,7 +80,7 @@ public class InsertNo {
 		String stime = dateFormat.format(startTime);
 		String etime = dateFormat.format(endTime);
 		String[] openNumInfoArray = openInfo.split(" ");
-		int eartnRateTmp = Integer.parseInt(openNumInfoArray[3]);
+		int eartnRateTmp = (int)(Double.parseDouble(openNumInfoArray[3])*10000);
 		int eartMoney = Integer.parseInt(openNumInfoArray[2]);
 		preparedStatement = connection.prepareStatement("insert into ssc values ("+id+",'"+noStr+"',"+sum+","+cross+",'"+nowStr+"',"+times
 				+",'"+qishu+"','"+daxiao+"','"+danshuang+"','"+longhuhe+"','"+qian+"','"+zhong+"','"+hou+"','"+stime+"','"+etime
@@ -90,7 +90,9 @@ public class InsertNo {
 		resultSet = preparedStatement.executeQuery("select * from ssc order by id desc limit 0,1");
 		resultSet.next();
 		int newSscId = resultSet.getInt("id")+1;
+		System.out.println("插入完："+new Date());
 		fenzhang(connection,preparedStatement,numRules,newSscId,noStr,startTime,endTime,qishu);
+		System.out.println("更新完："+new Date());
 		dbHelper.closeAll(connection, preparedStatement, resultSet);
 	}
 	

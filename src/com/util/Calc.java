@@ -7,10 +7,12 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class Calc {
 	public void Open() throws SQLException {
+		System.out.println("开始时间："+new Date());
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date thisDoStartTime = CurOrder.startDate;
 		Date thisDoEndTime = CurOrder.endDate;
@@ -20,7 +22,7 @@ public class Calc {
 		String endTime = simpleDateFormat.format(thisDoEndTime);
 		CurOrder.beforeOpen();
 		String openInfo = "";
-		String[] earnRatePathArray = {"0.15*0.25","0.05*0.15","0*0.05","0.25*0.5","0.5*1","-0.1*0"};
+		String[] earnRatePathArray = {"15*25","5*15","0*5","25*50","50*100","-10*0"};
 		DbHelper dbHelper = new DbHelper();
 		Connection connection = dbHelper.getConnection();
 		String earnSql = "select sum(money) from sscorder as earn where otime >= '"+startTime+"' and otime <= '"+endTime+"'";
@@ -30,8 +32,21 @@ public class Calc {
 		int inMoney = resultSet.getInt(1);
 		preparedStatement = connection.prepareStatement("select * from sscorder where otime >= '"+startTime+"' and otime <= '"+endTime+"'");
 		resultSet = preparedStatement.executeQuery();
+		resultSet.last(); //结果集指针知道最后一行数据  
+		int ordersArrayLength = resultSet.getRow();  
+		    
+		resultSet.beforeFirst();
+		String[][] ordersArray = new String[ordersArrayLength][2];
+		ordersArrayLength = 0;
+		while (resultSet.next()) {
+			String[] dataArray = new String[2];
+			dataArray[0] = resultSet.getInt("pos")+"_"+resultSet.getInt("num");
+			dataArray[1] = String.valueOf(resultSet.getInt("emoney"));
+			ordersArray[ordersArrayLength++] = dataArray;
+		}
+		System.out.println("循环完时间："+new Date());
 		int[] nums = new int[5];
-		String[] openNumArray = new String[100000];
+		String[] openNumArray = new String[50000];
 		for(int j = 0;j< openNumArray.length;j++){
 			int payMoneyAll = 0;
 			for(int i=0;i<5;i++){
@@ -39,12 +54,13 @@ public class Calc {
 				nums[i] = num;
 			}
 			List<String> strings = panduan(nums);
-			
-			resultSet.beforeFirst();
-			while (resultSet.next()) {
-				String balltmp = resultSet.getInt("pos")+"_"+resultSet.getInt("num");
-				int payMoney = resultSet.getInt("emoney");
-				for(String ballcur : strings){
+			Iterator<String> iterator;
+			for (String[] dataArray : ordersArray) {
+				String balltmp = dataArray[0];
+				int payMoney = Integer.valueOf(dataArray[1]);
+				iterator = strings.iterator();
+				while (iterator.hasNext()) {
+					String ballcur = (String) iterator.next();
 					if(ballcur.equals(balltmp)){
 						payMoneyAll += payMoney;
 						break;
@@ -54,21 +70,21 @@ public class Calc {
 			int tmpEarnMoney = inMoney - payMoneyAll;
 			double DearnRate = 0;
 			if(tmpEarnMoney != 0D){
-				DearnRate = tmpEarnMoney*100 / inMoney;
+				DearnRate = (double)tmpEarnMoney / (double)inMoney;
 			}
-			int earnRate = (int)DearnRate;
-			openNumArray[j] = (j+1)+" "+getNo(nums)+" "+tmpEarnMoney+" "+String.valueOf(earnRate);
+			openNumArray[j] = (j+1)+" "+getNo(nums)+" "+tmpEarnMoney+" "+String.valueOf(DearnRate);
 		}
-		int minRate = 0,maxRate = 0,eartnRateTmp = 0;
+		System.out.println("万号选择完："+new Date());
+		double minRate = 0,maxRate = 0,eartnRateTmp = 0;
 		for (int i = 0; i < earnRatePathArray.length; i++) {
 			String earnRatePathTmp = earnRatePathArray[i];
 			String[] rateRangeArray = earnRatePathTmp.split("\\*");
-			minRate = (int)Double.parseDouble(rateRangeArray[0])*100;
-			maxRate = (int)Double.parseDouble(rateRangeArray[1])*100;
+			minRate = Double.parseDouble(rateRangeArray[0]);
+			maxRate = Double.parseDouble(rateRangeArray[1]);
 			boolean isHas = false;
 			for (int k = 0; k < openNumArray.length; k++) {
 				String[] openNumInfoArray = openNumArray[k].split(" ");
-				eartnRateTmp = (int)Double.parseDouble(openNumInfoArray[3]);
+				eartnRateTmp = Double.parseDouble(openNumInfoArray[3])*100;
 				if(eartnRateTmp >= minRate && eartnRateTmp <= maxRate){
 					isHas = true;
 					openInfo = openNumArray[k];
@@ -84,6 +100,7 @@ public class Calc {
 			int num = Integer.valueOf(charNumArray[i]+"");
 			nums[i] = num;
 		}
+		System.out.println("最优选择完："+new Date());
 		List<String> numRules = panduan(nums);
 		insertNo.insertAll(nums,numRules,openInfo,inMoney,thisDoStartTime,thisDoEndTime,thisDoQihao,thisDoTims);
 		CurOrder.loaded();
