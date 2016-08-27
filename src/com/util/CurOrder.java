@@ -26,6 +26,7 @@ public class CurOrder {
 	public static List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 	public static String url = "http://localhost:8080/biz-pay/";
 	public static boolean isOk = false;
+	public static String[] earnRatePathArray;
 	
 	public static void resultSetToList(ResultSet rs) throws java.sql.SQLException {   
 		list = new ArrayList<Map<String,Object>>();
@@ -93,6 +94,12 @@ public class CurOrder {
     	qishu = dateFormat_day_no.format(startDate)+str_times;
     	resultSet.beforeFirst();
     	resultSetToList(resultSet);
+    	preparedStatement = connection.prepareStatement("select * from earn_rate order by sort asc");
+    	resultSet = preparedStatement.executeQuery();
+    	while(resultSet.next()){
+    		resultSet.getDouble("efrom");
+    		resultSet.getDouble("eend");
+    	}
     	dbHelper.closeAll(connection, preparedStatement, resultSet);
     	isOk = true;
 	}
