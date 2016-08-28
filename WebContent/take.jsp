@@ -9,6 +9,7 @@
 <%
 	if(session.getAttribute("trueName") == null){
 		response.sendRedirect("save_card.jsp");
+		return;
 	}
 	String id = session.getAttribute("id").toString();
 	DbHelper dbHelper = new DbHelper();

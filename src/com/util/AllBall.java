@@ -13,31 +13,32 @@ public class AllBall {
 //	}
 	
 	public static double getRate(int pos,int no){
+		BallRate ballRate = CurOrder.ballRate;
 		if(pos < 6){
 			if(no <11){
-				return 9.8;
+				return ballRate.danqiu;
 			}else{
-				return 1.98;
+				return ballRate.daxiaodashuang;
 			}
 		}else if(pos == 6){
-			if(no == 1 || no == 3 || no == 5){
-				return 1.98;
-			}else if(no == 2 || no == 4 || no ==6){
-				return 1.97;
-			}else if(no == 8){
-				return 8.88;
+			if(no >= 1 || no <=6){
+				return ballRate.daxiaodashuang;
+			}else if(no == 7){
+				return ballRate.he;
 			}else{
 				return 0;
 			}
 		}else if(pos == 7 || pos == 8 || pos == 9){
 			if(no == 1){
-				return 66.01;
+				return ballRate.baozi;
 			}else if(no == 2){
-				return 12.01;
+				return ballRate.shunzi;
 			}else if(no == 3){
-				return 2.81;
-			}else if(no == 4 || no == 5){
-				return 2.21;
+				return ballRate.duizi;
+			}else if(no == 4){
+				return  ballRate.banshun;
+			}else if(no == 5){
+				return  ballRate.zaliu;
 			}else{
 				return 0;
 			}

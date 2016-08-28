@@ -22,7 +22,8 @@ public class Calc {
 		String endTime = simpleDateFormat.format(thisDoEndTime);
 		CurOrder.beforeOpen();
 		String openInfo = "";
-		String[] earnRatePathArray = {"15*25","5*15","0*5","25*50","50*100","-10*0"};
+//		String[] earnRatePathArray = {"15*25","5*15","0*5","25*50","50*100","-10*0"};
+		String[] earnRatePathArray = CurOrder.earnRatePathArray;
 		DbHelper dbHelper = new DbHelper();
 		Connection connection = dbHelper.getConnection();
 		String earnSql = "select sum(money) from sscorder as earn where otime >= '"+startTime+"' and otime <= '"+endTime+"'";

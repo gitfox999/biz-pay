@@ -1,20 +1,17 @@
-<%@page import="java.util.Date"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="com.sun.org.apache.bcel.internal.generic.SIPUSH"%>
-<%@page import="com.util.CurOrder"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
-<!-- saved from url=(0037)http://www.js9588.com/Lottery/Csc.php -->
+<!-- saved from url=(0039)http://www.7378d.com/AboutUs.php?type=1 -->
 <html class="madvertis zh-cn at1"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 
 <title>金沙国际</title>
 <link href="resource/css/standard.css" rel="stylesheet">
 <link href="resource/css/xinhao99.css" rel="stylesheet">
+
 <style>/* header */
 .slogan{background: url('resource/images/slogan02.png') no-repeat 0 bottom;}
-
+.news-wrap{background: url('resource/images/newsbg02.png') no-repeat 50px 3px;}
 .login-wrap{background: url('resource/images/loginbg02.png') no-repeat center 0;}
 .is-login .login-wrap{background: url('resource/images/loginbg02.png') no-repeat center bottom;}
 /* first */
@@ -45,15 +42,15 @@
 .sidemenu-header{background: url('resource/images/sidebar_top.png') no-repeat center 0;}
 /*page-title*/
 .header-title{
-                    background: url('resource/images/title_lottery.png') no-repeat 0 0;
+                    background: url('resource/images/title_welcome.png') no-repeat 0 0;
     }
 .header-title.isTOP{background: url('resource/images/title_livetop.png') no-repeat 0 0;}
 .header-title-bg{
-                background: url('resource/images/ad_lottery.png') no-repeat 0 bottom;
+                background: url('resource/images/ad_welcome.png') no-repeat 0 bottom;
     }
 /* game */
 #Game-left-prize .game-jackpot-style {background-image: url('resource/images/jackpot.png');}
-.GameIcon-First {background-image: url('resource/images/First_zh-cn.png');}
+.GameIcon-First {background-image: url('/cl/tpl/commonFile/images/GameIcon/First_zh-cn.png');}
 /* footer */
 .footer-download{background: url('resource/images/btn_download.png') no-repeat 0 0;}
 .footer-download:hover{background: url('resource/images/btn_download.png') no-repeat 0 bottom;}
@@ -69,26 +66,57 @@
 <script type="text/javascript" language="JavaScript" src="resource/js/main.js"></script>
 <script type="text/javascript" language="JavaScript" src="resource/js/layer.js"></script>
 <link type="text/css" rel="stylesheet" href="resource/css/layer.css" id="skinlayercss">
-<link type="text/css" rel="stylesheet" href="resource/css/ssc_sj.css">
-<script type="text/javascript" src="cq_ssc.js"></script>
 <style type="text/css" media="screen">#ele-logo-wrap {visibility:hidden}</style></head>
 <body>
             <div id="mainBody">
             <%@ include file="head_nofix.jsp" %>            <div id="page-container">
     <div id="page-body" class="clearfix">
-   <div class="lottery_main">
-<div class="ssc_right">
-  <div id="auto_list"><table width="100%" border="0" cellspacing="1" cellpadding="0" class="clbian"><tbody><tr class="clbian_tr_title"><td colspan="2">开奖结果</td></tr><tr class="clbian_tr_title"><td>开奖期数</td><td>开奖号码</td></tr><tr class="clbian_tr_txt"><td class="qihao">20160814080</td><td class="haoma">8,0,4,5,8</td></tr><tr class="clbian_tr_txt"><td class="qihao">20160814079</td><td class="haoma">5,3,4,6,7</td></tr><tr class="clbian_tr_txt"><td class="qihao">20160814078</td><td class="haoma">0,1,5,9,6</td></tr><tr class="clbian_tr_txt"><td class="qihao">20160814077</td><td class="haoma">8,2,5,9,2</td></tr><tr class="clbian_tr_txt"><td class="qihao">20160814076</td><td class="haoma">7,9,0,4,4</td></tr><tr class="clbian_tr_txt"><td class="qihao">20160814075</td><td class="haoma">3,9,5,0,8</td></tr><tr class="clbian_tr_txt"><td class="qihao">20160814074</td><td class="haoma">9,0,0,4,2</td></tr><tr class="clbian_tr_txt"><td class="qihao">20160814073</td><td class="haoma">4,5,2,8,4</td></tr><tr class="clbian_tr_txt"><td class="qihao">20160814072</td><td class="haoma">1,2,1,1,5</td></tr><tr class="clbian_tr_txt"><td class="qihao">20160814071</td><td class="haoma">4,3,8,2,5</td></tr><tr class="clbian_tr_txt"><td class="qihao">20160814070</td><td class="haoma">8,6,8,8,7</td></tr><tr class="clbian_tr_txt"><td class="qihao">20160814069</td><td class="haoma">4,9,8,9,1</td></tr><tr class="clbian_tr_txt"><td class="qihao">20160814068</td><td class="haoma">6,5,0,0,3</td></tr><tr class="clbian_tr_txt"><td class="qihao">20160814067</td><td class="haoma">3,2,2,7,2</td></tr><tr class="clbian_tr_txt"><td class="qihao">20160814066</td><td class="haoma">6,3,7,5,9</td></tr></tbody></table></div>
+        <!--    main   -->
+                                <div id="page-sidebar">
+    <div class="sidemenu-header"></div>
+    <div class="sidemenu-body">
+        <ul class="sidemenu">
+        	<li><a href="javascript:crownsports();">体育赛事</a></li>
+            <li><a href="javascript:GoTo('1','Live');">视讯直播</a></li>
+            <li><a href="javascript:GoTo('1','Game');">电子游艺</a></li>
+            <li><a href="javascript:GoTo('1','Lottery');">彩票游戏</a></li>
+        </ul>
+    </div>
+    <div class="sidemenu-footer"></div>
+</div>            <div id="page-right">
+                <div class="about-bg-top"></div>
+                <link href="resource/css/fckeditor.css" rel="stylesheet" type="text/css">
+<div id="direction" class="advertis-event">
+     
+    <div id="articles"><h3>关于我们</h3><div><div>
+                
+<p></p><p>
+	金沙国际是最具规模且成长最快的在线游戏网站之一，提供刺激好玩的体育博彩、乐透彩等在线娱乐，为全球博彩爱好者提供最优惠的赔率和最优质的服务，并正发展成为最受欢迎的网上在线娱乐公司，真诚地为您提供最好最新的游戏产品，多种类的语言支持，最具吸引力的独家优惠，及卓越的客户服务，让您尽情享受游戏的乐趣！
+</p>
+<div id="Union1">
+	<p>
+		在加入我们的游戏之前，请您确定您已年满18周岁；
+	</p>
+	<p>
+		每一个用户只能拥有相对应的唯一的账户。如果我们发现任何用户有欺诈行为或非常规的投注方式，我们将立即关闭及取消他的帐户，并且有权利冻结账户盈利以及投注本金。
+	</p>
+	<p>
+		任何未年满18岁的用户，在我公司开户都将被冻结并注销账户。博彩只是一种娱乐消遣的方式，强烈提醒您不要过度沉迷于游戏以至于对其经济，事业，家庭和社会产生负面影响。我们强烈建议所有客户正确面对博彩行为以及拥有一个正确的游戏心态。为保障客户利益，我们提供账户自我冻结、最大注金限制功能，客户一旦申请账户可以被冻结或者限制投注金额。
+	</p>
+	<p>
+		如果您还有任何的疑问随时欢迎访问我们的在线客服，我们将有专人耐心回答您的问题。谢谢！
+	</p>
+	<p>
+		&nbsp;&nbsp;&nbsp;&nbsp; <strong>联系邮箱：</strong><a href="mailto:jinsha7378@gmail.com"><span style="color:#E53333;"><strong>jinsha7378@gmail.com</strong></span></a> 
+	</p>
+</div><p></p>
 </div>
-<div class="ssc_left">
-    <iframe id="mainframe" name="mainframe" allowTransparency="true"  frameborder="0" scrolling="no" width="810" src="ssc.jsp" height="940" style="background:transparent;"></iframe>
-    <div class="lottery_clear"></div>
-</div>
-</div>
-<div class="lottery_clear" style="height:20px;"></div>
+</div></div>
+    </div>
+                <div class="about-bg-bottom"></div>
+            </div>
+            </div>
 </div>            <%@ include file="pagefooter.jsp" %>        </div>
-<div id="endtime"></div>
-<div style="display:none" id="look"></div>
 <!-- <ul id="TplFloatPic_0" class="TplFloatSet" style="position:absolute;cursor:pointer;display:none;" picfloat="left" class="png_fix">
             <li><a  onclick="GoTo('1','Reg');">
             <img src="/images/zuo_01.png?77379" align="center" alt="" class="png_fix"/>
@@ -101,7 +129,7 @@
         </a></li>
 		<li><a onclick="FloatClose(this);"><img src="/images/zuo_04.png" align="center"  class="png_fix"/></a></li>
         </ul> -->
-    <ul id="TplFloatPic_1" class="TplFloatSet" style="position: absolute; cursor: pointer; z-index: 1000; top: 150px; right: 5px; width: 127px;" picfloat="right">
+    <ul id="TplFloatPic_1" class="TplFloatSet" style="position: absolute; cursor: pointer; z-index: 1000; top: 431.95px; right: 5px; width: 127px;" picfloat="right">
             <li><a onclick="OnlineServer();" style="width: 127px; height: 213px;">
             <img src="resource/images/you_01.png" align="center" alt="" class="png_fix" width="127" height="213">
         </a></li>
@@ -293,4 +321,4 @@ if('undefined' != typeof downloadvwin){
                             showalert();
                     });
     </script>
-<![endif]--></div></body></html>
+<![endif]--></body></html>

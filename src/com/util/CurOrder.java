@@ -27,6 +27,8 @@ public class CurOrder {
 	public static String url = "http://localhost:8080/biz-pay/";
 	public static boolean isOk = false;
 	public static String[] earnRatePathArray;
+	public static BallRate ballRate = new BallRate();
+	public static Infos infos = new Infos();
 	
 	public static void resultSetToList(ResultSet rs) throws java.sql.SQLException {   
 		list = new ArrayList<Map<String,Object>>();
@@ -94,11 +96,63 @@ public class CurOrder {
     	qishu = dateFormat_day_no.format(startDate)+str_times;
     	resultSet.beforeFirst();
     	resultSetToList(resultSet);
+    	//
     	preparedStatement = connection.prepareStatement("select * from earn_rate order by sort asc");
     	resultSet = preparedStatement.executeQuery();
+    	resultSet.last(); //结果集指针知道最后一行数据  
+		int earnRatePathArrayLength = resultSet.getRow();  
+		earnRatePathArray = new String[earnRatePathArrayLength];
+		resultSet.beforeFirst();
+		int i=0;
     	while(resultSet.next()){
-    		resultSet.getDouble("efrom");
-    		resultSet.getDouble("eend");
+    		String strTmp = resultSet.getDouble("efrom")+"*"+resultSet.getDouble("eend");
+    		earnRatePathArray[i++] = strTmp;
+    	}
+    	
+    	//
+    	preparedStatement = connection.prepareStatement("select * from config where id order by id asc");
+    	resultSet = preparedStatement.executeQuery();
+    	while(resultSet.next()){
+    		int id = resultSet.getInt("id");
+    		String value = resultSet.getString("value");
+    		double rate = 0;
+    		if(id <=8){
+    			rate = Double.valueOf(value);
+    		}
+    		
+    		if(id == 1){
+    			ballRate.danqiu = rate;
+    		}else if(id == 2){
+    			ballRate.daxiaodashuang = rate;
+    		}else if(id == 3){
+    			ballRate.he = rate;
+    		}else if(id == 4){
+    			ballRate.baozi = rate;
+    		}else if(id == 5){
+    			ballRate.shunzi = rate;
+    		}else if(id == 6){
+    			ballRate.duizi = rate;
+    		}else if(id == 7){
+    			ballRate.banshun = rate;
+    		}else if(id == 8){
+    			ballRate.zaliu = rate;
+    		}else if(id == 9){
+    			infos.bankName = value;
+    		}else if(id == 10){
+    			infos.bankCard = value;
+    		}else if(id == 11){
+    			infos.kaihuhang = value;
+    		}else if(id == 12){
+    			infos.bankPerson = value;
+    		}else if(id == 13){
+    			infos.zhifubao = value;
+    		}else if(id == 14){
+    			infos.weixin = value;
+    		}else if(id == 15){
+    			infos.notic = value;
+    		}else if(id == 16){
+    			infos.connect = value;
+    		}
     	}
     	dbHelper.closeAll(connection, preparedStatement, resultSet);
     	isOk = true;

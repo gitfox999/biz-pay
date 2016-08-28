@@ -15,13 +15,13 @@
 	if(resultSet.next()){
 		int id = resultSet.getInt("id");
 		session.setAttribute("name", name);
-		session.setAttribute("money", resultSet.getInt("money"));
+		session.setAttribute("money", ((double)resultSet.getInt("money"))/100);
 		session.setAttribute("id", id);
+		session.setAttribute("trueName", resultSet.getString("trueName"));
 		dbHelper.closeAll(connection, preparedStatement, resultSet);
 		response.getWriter().print("4");
 	}else{
 		dbHelper.closeAll(connection, preparedStatement, resultSet);
 		response.getWriter().print("2");
 	}
-	
 %>

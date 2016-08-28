@@ -1,3 +1,4 @@
+<%@page import="com.util.CurOrder"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -26,12 +27,12 @@
                         <td colspan="6" align="center" bgcolor="#333333" style="font-size:14px; color:#FF0">请选择下列公司账号进行转账汇款</td>
                     </tr>
                                                 <tr style="background-color: rgb(255, 255, 255);">
-                                <td width="200" height="24" align="right">工商银行：</td>
-                                <td width="200" style="font-size:14px;color:#F00;">4200201401010122722</td>
+                                <td width="200" height="24" align="right"><%=CurOrder.infos.bankName %>：</td>
+                                <td width="200" style="font-size:14px;color:#F00;"><%=CurOrder.infos.bankCard %></td>
                                 <td width="60" align="right">开户名：</td>
-                                <td width="100" align="center" style="font-size:14px;color:#F00;">彭明军</td>
+                                <td width="100" align="center" style="font-size:14px;color:#F00;"><%=CurOrder.infos.bankPerson %></td>
                                 <td width="60" align="right">开户行：</td>
-                                <td style="font-size:14px;color:#F00;">长春繁荣路支行</td>
+                                <td style="font-size:14px;color:#F00;"><%=CurOrder.infos.kaihuhang %></td>
                             </tr>
                             <tr>
                         <td height="24" colspan="6"><p><strong>温馨提示：</strong><br>

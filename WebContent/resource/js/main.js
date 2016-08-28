@@ -1,5 +1,5 @@
 ﻿function AboutUs(type){
-	window.location.href='/AboutUs.php?type='+type;
+	window.location.href='about.jsp?type='+type;
 	//window.open('/AboutUs/?type='+type,"newFrame");
 }
 function Mobile(){
@@ -100,17 +100,10 @@ function GoTo(type,url,mulu){
 	}
 }
 function LoadUserInfo(){
-	$.get("/Load/UserMoney.php", {t:Math.random()}, function(data)
+	$.get("class/UserMoney.jsp", {t:Math.random()}, function(data)
 		{
-				if(data.yz!=1){
-					alert("您的账户长时间未操作自动退出或从其他地区登陆！");
-					window.location.href='/LogOut.php';
-					return false;
-				}else{
+				if(data && data.money){
 					$("#user_money").html(data.money);
-					$("#user_sms").html(data.sms);
-					$("#shabasports1").html(data.shabasports1s);
-                    $("#crownsports1").html(data.crownsports1s);
 				}
 				
 		}, "json");

@@ -11,7 +11,7 @@
 <!-- saved from url=(0044)http://www.7378b.com/Member/Data/Lottery.php -->
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>Member</title>
+<title>彩票投注记录</title>
 <link rel="stylesheet" type="text/css" href="resource/css/general.css">
 <link rel="stylesheet" type="text/css" href="resource/css/jquery-ui.css">
 <script type="text/javascript" src="resource/js/jquery-1.7.2.min.js"></script>
@@ -45,13 +45,13 @@
 	DbHelper dbHelper = new DbHelper();
 	Connection connection = dbHelper.getConnection();
 	PreparedStatement preparedStatement = connection.prepareStatement("select count(*) _count from sscorder where memid="+id
-			+" and otime >= '"+S_date+"' and otime <= '"+E_date+"'");
+			+" and otime >= '"+S_date+"' and otime <= '"+E_date+" 23:59:59'");
 	ResultSet resultSet = preparedStatement.executeQuery();
 	resultSet.next();
 	int allCount = resultSet.getInt("_count");
 	int pageCount = allCount/size+1;
 	preparedStatement = connection.prepareStatement("select * from sscorder where memid="+id
-			+" and otime >= '"+S_date+"' and otime <= '"+E_date+"' order by otime desc limit "+(pageno - 1)*size+","+pageno*size);
+			+" and otime >= '"+S_date+"' and otime <= '"+E_date+" 23:59:59' order by otime desc limit "+(pageno - 1)*size+","+pageno*size);
 	resultSet = preparedStatement.executeQuery();
 	String lastPage = "lottery.jsp?page="+pageCount;
 	String nextPage = "lottery.jsp?page="+(pageno+1);
@@ -88,9 +88,10 @@
             <tbody><tr>
               <th>投注时间
               </th><th>注单号
-              </th><th width="350">投注详细信息
+              </th><th width="250">投注详细信息
               </th><th>下注金额
-            </th><th>输赢结果</th></tr>
+            </th><th>盈利
+            </th><th>结果</th></tr>
             <%if(allCount == 0){ %>
     <tr style="background-color: rgb(255, 255, 255);">
       <td colspan="5" align="center">暂无记录</td>
@@ -105,19 +106,25 @@
     	  double emoney = ((double)resultSet.getInt("emoney"))/100;
     	  int iswin = resultSet.getInt("iswin");
     	  String strIswin = "未开奖";
+    	  String style = "gray";
     	  if(iswin == 0){
     		  strIswin = "输";
+    		  emoney = 0;
+    		  style = "green";
     	  }else if(iswin == 1){
     		  strIswin = "赢";
+    		  style = "red";
     	  }else{
     		  strIswin = "未开奖"; 
+    		  emoney = 0;
     	  }
       %>
-      <tr style="background-color: rgb(255, 255, 255);">
+      <tr style="background-color: rgb(255, 255, 255);color: '<%=style %>'">
               <th><%=otime %>
               </th><th><%=qihao %>
-              </th><th width="350"><%=detail %>
+              </th><th><%=detail %>
               </th><th><%=money %>
+            </th><th><%=emoney %>
             </th><th><%=strIswin %></th></tr>
 	  <tr>
 	  <%

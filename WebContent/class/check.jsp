@@ -1,3 +1,5 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.util.MD5Util"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
@@ -10,6 +12,7 @@
 	String pwd = request.getParameter("password");
 	String pwd2 = request.getParameter("password2");
 	String value = request.getParameter("param");
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	DbHelper dbHelper = new DbHelper();
 	Connection connection = dbHelper.getConnection();
 	PreparedStatement preparedStatement = connection.prepareStatement("select * from member where name = '"+value+"'");
@@ -19,8 +22,9 @@
 		response.getWriter().print("<scrpit>alert(\"该用户名已存在请重新输入\");window.history.go(-1);</script>");
 	}else{
 		pwd = MD5Util.MD5(pwd);
-		String money = "100000.00";
-		preparedStatement.execute("insert into member (name,pwd,money) values ('"+name+"','"+pwd+"',"+money+")");
+		String money = "0";
+		String addTs = dateFormat.format(new Date());
+		preparedStatement.execute("insert into member (name,pwd,money,add_ts) values ('"+name+"','"+pwd+"',"+money+",'"+addTs+"')");
 		resultSet = preparedStatement.executeQuery("select * from member where name ='"+name+"' and pwd='"+pwd+"'");
 		resultSet.next();
 		int id = resultSet.getInt("id");

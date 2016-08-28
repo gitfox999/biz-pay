@@ -55,42 +55,15 @@
                             <td width="200"><div class="jqTransformInputWrapper" style="width: 206px;"><div class="jqTransformInputInner"><div><input type="password" value="" name="password2" class="inputxt jqtranformdone jqTransformInput" datatype="*" maxlength="16" recheck="password" nullmsg="请再输入一次密码！" errormsg="您两次输入的账号密码不一致！"></div></div></div></td>
                             <td><div class="Validform_checktip">请再次输入您的登录密码！</div></td>
                         </tr>
-                    </tbody></table>
-                    <div class="clear"></div> 
-                </fieldset>
-                <fieldset>
-                    <legend>会员个人信息</legend>
-                    <table width="100%" border="0" align="left" cellpadding="0" cellspacing="0">
-                                                        <tbody><tr>
-                                    <td width="150" align="right"><font style="color:#F00;">*</font>真实姓名：</td>
-                                    <td width="200"><div class="jqTransformInputWrapper" style="width: 206px;"><div class="jqTransformInputInner"><div><input type="text" value="" name="payname" class="inputxt jqtranformdone jqTransformInput" datatype="zh" nullmsg="请正确输入您的姓名！" errormsg="请正确输入您的姓名！"></div></div></div></td>
-                                    <td><div class="Validform_checktip">必须与您的银行帐户名称相同，否则不能出款!</div></td>
-                                </tr>
-                                                                                        <tr>
-                                    <td width="150" align="right"><font style="color:#F00;">*</font>手机号码：</td>
-                                    <td width="200"><div class="jqTransformInputWrapper" style="width: 206px;"><div class="jqTransformInputInner"><div><input type="text" value="" name="mobile" class="inputxt jqtranformdone jqTransformInput" datatype="m" nullmsg="请正确输入您的手机号码！" errormsg="请正确输入您的手机号码！"></div></div></div></td>
-                                    <td><div class="Validform_checktip">请输入您的手机号码！</div></td>
-                                </tr>
-                                                                                                                                        <tr>
-                            <td width="150" align="right"><font style="color:#F00;">*</font>资金密码：</td>
-                            <td width="200"><div class="jqTransformInputWrapper" style="width: 206px;"><div class="jqTransformInputInner"><div><input type="password" value="" name="moneypass" class="inputxt jqtranformdone jqTransformInput" datatype="*6-16" maxlength="16" nullmsg="请设置您的资金密码！" errormsg="密码范围在6~16位之间！"></div></div></div></td>
-                            <td><div class="Validform_checktip">提款认证必须，请务必记住！</div></td>
-                        </tr>
                         <tr>
-                            <td width="150" align="right"><font style="color:#F00;">*</font>确认资金密码：</td>
-                            <td width="200"><div class="jqTransformInputWrapper" style="width: 206px;"><div class="jqTransformInputInner"><div><input type="password" value="" name="moneypass2" class="inputxt jqtranformdone jqTransformInput" datatype="*" maxlength="16" recheck="moneypass" nullmsg="请再输入一次密码！" errormsg="您两次输入的资金密码不一致！"></div></div></div></td>
-                            <td><div class="Validform_checktip">请再次输入您的资金密码！</div></td>
-                        </tr>
-                        <input type="hidden" id="screensize" name="screensize" value="1280x800">
-                    <tr>
                         <td>&nbsp;</td>
                         <td colspan="2" align="left" style="padding:10px 0 10px 0;">
                             <button id="" name="" type="submit" class=" jqTransformButton"><span><span> 提 交 </span></span></button> <button id="" name="" type="reset" class=" jqTransformButton"><span><span> 重 置 </span></span></button>
                         </td>
                     </tr>
-                </tbody></table>
-                <div class="clear"></div> 
-            </fieldset>
+                    </tbody></table>
+                    <div class="clear"></div> 
+                </fieldset>
         </form>
         <script type="text/javascript" src="resource/js/Validform.js"></script>
         <script type="text/javascript" src="resource/js/jquery.jqtransform-min.js"></script>

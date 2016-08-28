@@ -1,9 +1,31 @@
+<%@page import="com.util.CurOrder"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="com.util.DbHelper"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0047)http://www.7378b.com/Member/Money/Save_Card.php -->
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<%
+	if(session.getAttribute("trueName") == null){
+		response.sendRedirect("save_card.jsp");
+		return;
+	}
+	String id = session.getAttribute("id").toString();
+	DbHelper dbHelper = new DbHelper();
+	Connection connection = dbHelper.getConnection();
+	PreparedStatement preparedStatement = connection.prepareStatement("select * from member where id = '"+id+"'");
+	ResultSet resultSet = preparedStatement.executeQuery();
+	resultSet.next();
+	String bank = resultSet.getString("bank");
+	String card = resultSet.getString("card");
+	String bankpos = resultSet.getString("bankpos");
+	double money = CurOrder.getTrueMoney(resultSet.getInt("money"));
+	String name = resultSet.getString("name");
+	dbHelper.closeAll(connection, preparedStatement, resultSet);
+%> 
 <title>Welcome</title>
 <link rel="stylesheet" type="text/css" href="resource/css/general.css">
 <script type="text/javascript" src="resource/js/jquery.js"></script>
@@ -16,11 +38,11 @@
         <form id="MyForm" action="class/save_card.jsp" method="post">
           <tbody><tr>
             <td align="right">会员账号：</td>
-            <td>ASDFQWER</td>
+            <td><%=name %></td>
           </tr>
           <tr>
             <td width="150" align="right">总账户余额：</td>
-            <td><font style="font-size:14px;color:#F00; font-weight:bold">0</font></td>
+            <td><font style="font-size:14px;color:#F00; font-weight:bold"><%=money %></font></td>
           </tr>
           <tr>
             <td colspan="2" align="left" bgcolor="#384967" style="font-size:14px; color:#FF0">以下为您的收款信息，请认真核对填写，填写后将无法修改，如果要修改您的收款银行账户，请联络我们的客服人员！</td>

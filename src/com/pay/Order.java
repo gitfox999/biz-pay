@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -48,19 +49,28 @@ public class Order extends HttpServlet {
 			response.getWriter().write("<script type=\"text/javascript\">alert(\"您未登陆，请登录！\");parent.parent.location.href='index.jsp';</script>");
 			return;
 		}
-		int allMoney = Integer.parseInt(session.getAttribute("money").toString());
+		int allMoney = 0;
+		int curMoney = 0;
+		String msg = "您的账户额度不足进行本次投注，请充值后在进行投注！";
 		String memId = session.getAttribute("id").toString();
 		Iterator<String> iterator = request.getParameterMap().keySet().iterator();
-		DbHelper dbHelper = new DbHelper();
-		Connection connection = dbHelper.getConnection();
-		PreparedStatement preparedStatement = null;
-		String msg = "您的账户额度不足进行本次投注，请充值后在进行投注！";
-		List<String> sqlList = new ArrayList<String>();
-		double allWin = 0;
-		int sumCost = 0;
-		int curMoney = allMoney;
-		Map<String, String> orderMap = OrderExplain.getMap();
 		try {
+			DbHelper dbHelper = new DbHelper();
+			Connection connection = dbHelper.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement("select * from member where id = "+memId);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if(!resultSet.next()){
+				response.getWriter().write("<script type=\"text/javascript\">alert(\"不存在该用户\");parent.parent.location.href='index.jsp';</script>");
+				return;
+			}else{
+				allMoney = resultSet.getInt("money");
+			}
+			List<String> sqlList = new ArrayList<String>();
+			double allWin = 0;
+			int sumCost = 0;
+			curMoney = allMoney;
+			int ocount = 0;
+			Map<String, String> orderMap = OrderExplain.getMap();
 			connection.setAutoCommit(false);
 			while (iterator.hasNext()) {
 				String paramName = (String) iterator.next();
@@ -81,7 +91,7 @@ public class Order extends HttpServlet {
 					
 					sqlList.add(sql);
 					sqlList.add(flowSql);
-					
+					ocount++;
 				}
 			}
 			if(allMoney >= sumCost){
@@ -92,12 +102,13 @@ public class Order extends HttpServlet {
 					preparedStatement.execute();
 				}
 				curMoney = allMoney - sumCost;
-				preparedStatement.execute("update member set money = '"+curMoney+"' where id="+memId);
+				String nowStr = dateFormat.format(new Date());
+				preparedStatement.execute("update member set money = '"+curMoney+"',ocount = ocount+"+ocount+",update_ts='"+nowStr+"' where id="+memId);
 				connection.commit();
 				msg = "投注完成！如果全中奖，你将获得"+((double)allWin)/100+"元奖金，祝您好运！";
 			}
 			dbHelper.closeAll(connection, preparedStatement, null);
-			session.setAttribute("money", curMoney);
+			session.setAttribute("money", ((double)curMoney)/100);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
