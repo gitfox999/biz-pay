@@ -38,7 +38,7 @@ public class DbHelper {
 		try {
 
 			driver_class = "com.mysql.jdbc.Driver";
-			driver_url = "jdbc:mysql://127.0.0.1/biz";
+			driver_url = "jdbc:mysql://119.29.150.142:3306/biz?useUnicode=true&amp;characterEncoding=utf8";
 			database_user = "root";
 			database_password = "x5";
 

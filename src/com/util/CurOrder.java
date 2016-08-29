@@ -24,7 +24,7 @@ public class CurOrder {
 	public static String preQishu;
 	public static String preNo;
 	public static List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
-	public static String url = "http://localhost:8080/biz-pay/";
+	public static String url = "http://119.29.150.142/b/";
 	public static boolean isOk = false;
 	public static String[] earnRatePathArray;
 	public static BallRate ballRate = new BallRate();

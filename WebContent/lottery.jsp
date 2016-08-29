@@ -131,7 +131,7 @@
       }
 		dbHelper.closeAll(connection, preparedStatement, resultSet);
 	  %>
-	  	<th colspan="5"><div class="Pagination"><a href="lottery.jsp?page=1" class="tips" title="首页">首页</a> 
+	  	<th colspan="6"><div class="Pagination"><a href="lottery.jsp?page=1" class="tips" title="首页">首页</a> 
 <a href="<%=prePage %>" class="tips" title="上一页">上一页</a> 
 
 

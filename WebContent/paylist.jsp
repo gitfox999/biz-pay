@@ -98,7 +98,6 @@
             }
       while(resultSet.next()){
     	  String ts = dateFormat2.format(resultSet.getTimestamp("ts"));
-    	  String qihao = resultSet.getString("qihao");
     	  String fromcard = resultSet.getString("fromcard");
     	  String remark = resultSet.getString("remark");
     	  double money = ((double)resultSet.getInt("money"))/100;

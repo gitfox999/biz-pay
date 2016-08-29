@@ -8,7 +8,8 @@
     
 <%
 	if(session.getAttribute("trueName") == null){
-		response.sendRedirect("save_card.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("save_card.jsp");
+		rd.forward(request, response);
 		return;
 	}
 	String id = session.getAttribute("id").toString();
