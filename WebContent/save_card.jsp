@@ -9,10 +9,6 @@
 <!-- saved from url=(0047)http://www.7378b.com/Member/Money/Save_Card.php -->
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-	if(session.getAttribute("trueName") == null){
-		response.sendRedirect("save_card.jsp");
-		return;
-	}
 	String id = session.getAttribute("id").toString();
 	DbHelper dbHelper = new DbHelper();
 	Connection connection = dbHelper.getConnection();
