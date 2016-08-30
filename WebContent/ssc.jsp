@@ -42,7 +42,7 @@ body {
 <div class="jsq">
     <span class="time">第 <font id="open_qihao">20160807098</font> 期<br>
         剩余<font id="whataction">投注</font>时间</span>
-    <span class="ssc">重庆时时彩<br>
+    <span class="ssc">河南时时彩<br>
         第 <font id="numbers">20160101001</font> 期</span>
     <span class="zh" id="autoinfo"><span>正在开奖...</span></span><font>
     <span class="sj" id="cqc_time" style="color: red;">00:00</span>

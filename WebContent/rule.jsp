@@ -20,14 +20,14 @@
         <tr>
             <td class="table_td2"><table width="700" border="0" cellspacing="0" cellpadding="0" align="center">
               <tbody><tr>
-                <td class="title_td">&nbsp;&nbsp;&nbsp;&nbsp;重庆时时彩游戏规则 </td>
+                <td class="title_td">&nbsp;&nbsp;&nbsp;&nbsp;河南时时彩游戏规则 </td>
               </tr>
               <tr>
                 <td>&nbsp;</td>
               </tr>
               <tr>
                 <td><ol class="no_style">
-                  <li>该游戏的投注时间、开奖时间和开奖号码与重庆时时彩完全同步，北京时间（GMT+8）每天白天从上午10：00开到晚上22：00，夜场从22：00至凌晨 2 点，每 10 分钟开一次奖，夜场每 5 分钟开一次奖，每天开奖 120 期（白天 72 期，夜间 48 期）。 
+                  <li>该游戏的投注时间、开奖时间和开奖号码与河南时时彩完全同步，北京时间（GMT+8）每天白天从上午10：00开到晚上22：00，夜场从22：00至凌晨 2 点，每 10 分钟开一次奖，夜场每 5 分钟开一次奖，每天开奖 120 期（白天 72 期，夜间 48 期）。 
 
 </li>
                 </ol></td>
