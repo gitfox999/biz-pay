@@ -20,12 +20,14 @@ public class Calc {
 		int thisDoTims = CurOrder.curTimes;
 		String startTime = simpleDateFormat.format(thisDoStartTime);
 		String endTime = simpleDateFormat.format(thisDoEndTime);
+		DbHelper dbHelper = new DbHelper();
+		Connection connection = dbHelper.getConnection();
+		//¼ÓÔØÅäÖÃ
+    	CurOrder.loadConfig(connection);
 		CurOrder.beforeOpen();
 		String openInfo = "";
 //		String[] earnRatePathArray = {"15*25","5*15","0*5","25*50","50*100","-10*0"};
 		String[] earnRatePathArray = CurOrder.earnRatePathArray;
-		DbHelper dbHelper = new DbHelper();
-		Connection connection = dbHelper.getConnection();
 		String earnSql = "select sum(money) from sscorder as earn where otime >= '"+startTime+"' and otime <= '"+endTime+"'";
 		PreparedStatement preparedStatement = connection.prepareStatement(earnSql);
 		ResultSet resultSet = preparedStatement.executeQuery();
@@ -54,20 +56,36 @@ public class Calc {
 				int num = (int)(0+Math.random()*(9-0+1));
 				nums[i] = num;
 			}
-			List<String> strings = panduan(nums);
-			Iterator<String> iterator;
+////			panduan(nums);
+//			List<String> strings = panduan(nums);
+////			List<String> strings = new ArrayList<String>();
+//			Iterator<String> iterator;
+//			for (String[] dataArray : ordersArray) {
+//				String balltmp = dataArray[0];
+//				int payMoney = Integer.valueOf(dataArray[1]);
+//				iterator = strings.iterator();
+//				while (iterator.hasNext()) {
+//					String ballcur = (String) iterator.next();
+//					if(ballcur.equals(balltmp)){
+//						payMoneyAll += payMoney;
+//						break;
+//					}
+//				}
+//			}
+			
+			String[] strings = panduan2(nums);
 			for (String[] dataArray : ordersArray) {
 				String balltmp = dataArray[0];
 				int payMoney = Integer.valueOf(dataArray[1]);
-				iterator = strings.iterator();
-				while (iterator.hasNext()) {
-					String ballcur = (String) iterator.next();
+				for (int i = 0; i < strings.length; i++) {
+					String ballcur = strings[i];
 					if(ballcur.equals(balltmp)){
 						payMoneyAll += payMoney;
 						break;
 					}
 				}
 			}
+			
 			int tmpEarnMoney = inMoney - payMoneyAll;
 			double DearnRate = 0;
 			if(tmpEarnMoney != 0D){
@@ -218,5 +236,16 @@ public class Calc {
 		if(ishz){strings.add("9_5");}
 		
 		return strings;
+	}
+	
+	public String[] panduan2(int[] nums){
+		List<String> strings = panduan(nums);
+		String[] strArray = new String[strings.size()];
+		Iterator<String> iterator = strings.iterator();
+		int i =0;
+		while (iterator.hasNext()) {
+			strArray[i++] = (String) iterator.next();
+		}
+		return strArray;
 	}
 }

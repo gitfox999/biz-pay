@@ -96,9 +96,16 @@ public class CurOrder {
     	qishu = dateFormat_day_no.format(startDate)+str_times;
     	resultSet.beforeFirst();
     	resultSetToList(resultSet);
-    	//
-    	preparedStatement = connection.prepareStatement("select * from earn_rate order by sort asc");
-    	resultSet = preparedStatement.executeQuery();
+    	//加载配置
+    	loadConfig(connection);
+    	
+    	dbHelper.closeAll(connection, preparedStatement, resultSet);
+    	isOk = true;
+	}
+	
+	public static void loadConfig(Connection connection) throws SQLException{
+		PreparedStatement preparedStatement = connection.prepareStatement("select * from earn_rate order by sort asc");
+    	ResultSet resultSet = preparedStatement.executeQuery();
     	resultSet.last(); //结果集指针知道最后一行数据  
 		int earnRatePathArrayLength = resultSet.getRow();  
 		earnRatePathArray = new String[earnRatePathArrayLength];
@@ -154,8 +161,8 @@ public class CurOrder {
     			infos.connect = value;
     		}
     	}
-    	dbHelper.closeAll(connection, preparedStatement, resultSet);
-    	isOk = true;
+    	resultSet.close();
+    	preparedStatement.close();
 	}
 	
 	public static void beforeOpen() throws SQLException{
